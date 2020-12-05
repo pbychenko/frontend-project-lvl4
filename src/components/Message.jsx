@@ -2,7 +2,8 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const Message = (props) => {
-  const { userName, text, date } = props;
+  // const { userName, text, date } = props;
+  const { userName, text } = props;
 
   return (
     <Card >
@@ -11,9 +12,9 @@ const Message = (props) => {
       <Card.Text>
         {text}
       </Card.Text>
-      <Card.Text>
+      {/* <Card.Text>
         {date}
-      </Card.Text>
+      </Card.Text> */}
     </Card.Body>
   </Card>);
 };

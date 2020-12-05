@@ -40,12 +40,12 @@ const App = () => (
               /> */}
             </ListGroup>
           </Col>
-          {/* <Col xs={12} md={7}>
+          <Col xs={12} md={7}>
               <>
                 <Messages />
-                <MessageForm />
+                {/* <MessageForm /> */}
               </>
-          </Col> */}
+          </Col>
       </Row>
     </Container>
   </>

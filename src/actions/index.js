@@ -6,6 +6,10 @@ export const fetchChannelsRequest = createAction('CHANNELS_FETCH_REQUEST');
 export const fetchChannelsSuccess = createAction('CHANNELS_FETCH_SUCCESS');
 export const fetchChannelsFailure = createAction('CHANNELS_FETCH_FAILURE');
 
+export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
+export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
+export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE')
+
 export const fetchChannels = () => async (dispatch) => {
     dispatch(fetchChannelsRequest());
     try {
@@ -18,3 +22,28 @@ export const fetchChannels = () => async (dispatch) => {
       throw e;
     }
 };
+
+export const addChannel = ({ channel }) => async (dispatch) => {
+    dispatch(addChannelRequest());
+    try {
+        const url = routes.channelsPath();
+        const response = await axios.post(url, { data });
+        dispatch(addChannelSuccess({ task: response.data }));
+    } catch (e) {
+        dispatch(addChannelFailure());
+        throw e;
+    };
+};
+  
+//   export const removeTask = (task) => async (dispatch) => {
+//     dispatch(removeTaskRequest());
+//     try {
+//       const url = routes.taskUrl(task.id);
+//       await axios.delete(url);
+//       dispatch(removeTaskSuccess({ id: task.id }));
+//     } catch (e) {
+//       dispatch(removeTaskFailure());
+//       throw e;
+//     }
+//   };
+
