@@ -19,20 +19,16 @@ import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import MessageForm from './MessageForm.jsx';
 
-const App = ({ data }) => (
+const App = () => (
   <>
     <Jumbotron>
         <h1 align='center'>CHATIK</h1>
     </Jumbotron>
-    {/* {data.channels[1].name} */}
     <Container>
         <Row>
           <Col xs={10} md={4}>
             <ListGroup variant="flush">
-              <Channels channels={data.channels}
-                // selectedChannel={selectedChannel}
-                // selectChannel={this.handleSelectChannel}
-              />
+              <Channels />
               <ListGroup.Item>
                 <Button variant="outline-info" type="submit" block 
                 // onClick={this.handleShowModal}
@@ -44,23 +40,14 @@ const App = ({ data }) => (
               /> */}
             </ListGroup>
           </Col>
-          <Col xs={12} md={7}>
-            {/* {(selectedChannel !== '')
-              ? ( */}
+          {/* <Col xs={12} md={7}>
               <>
-                <Messages 
-                visibleMessages={data.messages }
-                  />
-                <MessageForm 
-                // message={message}
-                // submitMessage={this.handleSubmit} writeMessage={this.handleChange}
-                  />
+                <Messages />
+                <MessageForm />
               </>
-              {/* ) : null
-            } */}
-          </Col>
-        </Row>
-      </Container>
+          </Col> */}
+      </Row>
+    </Container>
   </>
 );
 export default App;
