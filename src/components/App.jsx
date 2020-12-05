@@ -43,7 +43,7 @@ const App = () => (
           <Col xs={12} md={7}>
               <>
                 <Messages />
-                {/* <MessageForm /> */}
+                <MessageForm />
               </>
           </Col>
       </Row>
