@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
 
 const Messages = (props) => {
   const { messages } = props;
+  // console.log(messages)
 
   return (
     <ListGroup variant="flush">

@@ -25,7 +25,7 @@ const sendMessage = async (values, channelId) => {
   // const messageDate = new Date();
   const data = { data: { attributes: {...values, userName: 'Pavel2' } } };
   const response = await axios.post(url, { ...data });
-  console.log(response.data);
+  // console.log(response.data);
   // dispatch(addChannelSuccess({ task: response.data }));
 };
 
@@ -47,7 +47,7 @@ const MessageForm = (props) => {
     },
     validate,
     onSubmit: (values, { setSubmitting, resetForm }) => {
-      console.log(values)
+      // console.log(values)
       // setTimeout(() => {
       //   alert(JSON.stringify(values, null, 2));
       //   setSubmitting(false);
@@ -57,7 +57,7 @@ const MessageForm = (props) => {
       resetForm();
     },
   });
-  console.log(formik);
+  // console.log(formik);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

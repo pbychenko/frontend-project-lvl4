@@ -10,6 +10,10 @@ export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
 export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
 
+export const getNewMessage = createAction('MESSAGE_GET');
+// export const getMessage = createAction('CHANNEL_ADD_REQUEST');
+// export const getMessage = createAction('CHANNEL_ADD_REQUEST');
+
 // export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
 // export const sendMessageSuccess = createAction('MESSAGE_SEND_SUCCESS');
 // export const sendMessageFailure = createAction('MESSAGE_SEND_FAILURE');

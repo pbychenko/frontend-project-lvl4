@@ -6,8 +6,8 @@ import * as actions from '../actions/index.js';
 import gon from 'gon';
 
 const { channels, currentChannelsId, messages } = gon;
-const byId = _.keyBy(channels, 'id');
-const allIds = channels.map(c => c.id);
+// const byId = _.keyBy(channels, 'id');
+// const allIds = channels.map(c => c.id);
 
 const channells = handleActions({
   [actions.fetchChannelsSuccess](state, { payload }) {
@@ -21,14 +21,17 @@ const channells = handleActions({
 }, { byId: _.keyBy(channels, 'id'), allIds: channels.map(c => c.id) });
 
 const messagges = handleActions({
-  // [actions.fetchChannelsSuccess](state, { payload }) {
-  //   // console.log(payload);
+  [actions.getNewMessage](state, { payload: { data: { attributes } } }) {
+    // console.log(payload);
+    const { byId, allIds } = state;
+    console.log('in reducer');
+    console.log(attributes);
 
-  //   return {
-  //     byId: _.keyBy(payload.channels, 'id'),
-  //     allIds: payload.channels.map((t) => t.id),
-  //   };
-  // },
+    return {
+      byId: { ...byId, [attributes.id]: attributes },
+      allIds: [...allIds, attributes.id ],
+    };
+  },
 }, { byId: _.keyBy(messages, 'id'), allIds: messages.map(c => c.id) });
 
 const currentChannelId = handleActions({
