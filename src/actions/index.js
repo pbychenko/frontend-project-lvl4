@@ -8,7 +8,11 @@ export const fetchChannelsFailure = createAction('CHANNELS_FETCH_FAILURE');
 
 export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
-export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE')
+export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
+
+// export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
+// export const sendMessageSuccess = createAction('MESSAGE_SEND_SUCCESS');
+// export const sendMessageFailure = createAction('MESSAGE_SEND_FAILURE');
 
 export const fetchChannels = () => async (dispatch) => {
     dispatch(fetchChannelsRequest());
@@ -23,17 +27,37 @@ export const fetchChannels = () => async (dispatch) => {
     }
 };
 
-export const addChannel = ({ channel }) => async (dispatch) => {
-    dispatch(addChannelRequest());
-    try {
-        const url = routes.channelsPath();
-        const response = await axios.post(url, { data });
-        dispatch(addChannelSuccess({ task: response.data }));
-    } catch (e) {
-        dispatch(addChannelFailure());
-        throw e;
-    };
-};
+// export const sendMessage = ({ message }) => async (dispatch) => {
+//     dispatch(addChannelRequest());
+//     try {
+//         const url = routes.channelsPath();
+//         const response = await axios.post(url, { data });
+//         dispatch(addChannelSuccess({ task: response.data }));
+//     } catch (e) {
+//         dispatch(addChannelFailure());
+//         throw e;
+//     };
+// };
+
+// export const sendMessage = ({ message }) => async (dispatch) => {
+//       const url = routes.channelsPath();
+//       const response = await axios.post(url, { data });
+//       dispatch(addChannelSuccess({ task: response.data }));
+// };
+
+
+
+// export const addChannel = ({ channel }) => async (dispatch) => {
+//     dispatch(addChannelRequest());
+//     try {
+//         const url = routes.channelsPath();
+//         const response = await axios.post(url, { data });
+//         dispatch(addChannelSuccess({ task: response.data }));
+//     } catch (e) {
+//         dispatch(addChannelFailure());
+//         throw e;
+//     };
+// };
   
 //   export const removeTask = (task) => async (dispatch) => {
 //     dispatch(removeTaskRequest());

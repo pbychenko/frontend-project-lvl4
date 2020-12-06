@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
-  const { messagges: { byId, allIds } } = state;
+  const { messagges: { byId, allIds }, currentChannelId } = state;
   const messages = allIds.map((id) => byId[id]);
   return { messages };
 };

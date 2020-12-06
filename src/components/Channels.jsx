@@ -4,7 +4,7 @@ import * as actions from '../actions/index.js';
 import { ListGroup } from 'react-bootstrap';
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   const { channells: { byId, allIds } } = state;
   const channels = allIds.map((id) => byId[id]);
   return { channels };
