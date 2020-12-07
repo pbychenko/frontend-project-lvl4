@@ -8,11 +8,15 @@ export const fetchChannelsFailure = createAction('CHANNELS_FETCH_FAILURE');
 
 export const selectChannel = createAction('CHANNEL_SELECT');
 
-export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
-export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
-export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
+// export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
+// export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
+// export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
 
 export const getNewMessage = createAction('MESSAGE_GET');
+export const addNewChannel = createAction('CHANNEL_ADD');
+export const removeChannel = createAction('CHANNEL_REMOVE');
+export const renameChannel = createAction('CHANNEL_RENAME');
+
 // export const getMessage = createAction('CHANNEL_ADD_REQUEST');
 // export const getMessage = createAction('CHANNEL_ADD_REQUEST');
 

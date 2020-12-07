@@ -40,10 +40,17 @@ const currentChannelId = handleActions({
   },
 }, 1);
 
+const modalState = handleActions({
+  [actions.selectChannel](state, { payload: { id } }) {
+    return id;
+  },
+}, { showModal: true });
+
 
 
 export default combineReducers({
   channells,
   messagges,
   currentChannelId,
+  modalState,
 });

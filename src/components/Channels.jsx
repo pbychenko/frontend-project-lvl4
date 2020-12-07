@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
 
 const mapStateToProps = (state) => {
   // console.log(state);
@@ -32,8 +32,12 @@ const Channels = (props) => {
               onClick={handleSelectChannel(channel.id)}
               className={ channel.id === currentChannelId ? 'active' : null}
               >
-              {channel.name}</ListGroup.Item>))}
-          </ListGroup>);
+              {channel.name}
+          </ListGroup.Item>))}
+          <Button variant="outline-info" type="submit" block 
+                // onClick={this.handleShowModal}
+                >Add channel</Button>
+      </ListGroup>);
 };
 
 // export default Channels;

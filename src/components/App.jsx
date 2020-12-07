@@ -29,11 +29,12 @@ const App = () => (
           <Col xs={10} md={4}>
             <ListGroup variant="flush">
               <Channels />
-              <ListGroup.Item>
+              {/* <ListGroup.Item>
                 <Button variant="outline-info" type="submit" block 
                 // onClick={this.handleShowModal}
                 >Add channel</Button>
-                </ListGroup.Item>
+                </ListGroup.Item> */}
+                <MyModal />
               {/* <MyModal show={showModal} onFormChange={this.handleChange}
                 onFormSubmit={this.handleAddChannel} newChannelName={newChannelName}
                 onHide={this.handleCloseModal}
