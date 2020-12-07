@@ -35,14 +35,9 @@ const messagges = handleActions({
 }, { byId: _.keyBy(messages, 'id'), allIds: messages.map(c => c.id) });
 
 const currentChannelId = handleActions({
-  // [actions.fetchChannelsSuccess](state, { payload }) {
-  //   // console.log(payload);
-
-  //   return {
-  //     byId: _.keyBy(payload.channels, 'id'),
-  //     allIds: payload.channels.map((t) => t.id),
-  //   };
-  // },
+  [actions.selectChannel](state, { payload: { id } }) {
+    return id;
+  },
 }, 1);
 
 
