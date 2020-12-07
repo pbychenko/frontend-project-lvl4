@@ -2,6 +2,9 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import routes from '../routes.js';
+import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
   // console.log(state);
@@ -10,21 +13,37 @@ const mapStateToProps = (state) => {
   return { showModal };
 };
 
+const actionCreators = {
+  hideModal: actions.hideModal,
+};
+
 const validate = (values) => {
   const errors = {};
-  if (!values.newChannelName) {
-    errors.newChannelName = 'Required';
+  if (!values.name) {
+    errors.name = 'Required';
   } 
 
   return errors;
 };
 
 const AddChannelModal = (props) => {
-  const { showModal } = props;
+  const { showModal, hideModal } = props;
+
+   const addChannel = async (values) => {
+    console.log(values);
+    const url = routes.channelsPath();
+    const data = { data: { attributes: {...values } } };
+    const response = await axios.post(url, { ...data });
+    // console.log(response.data);
+    // dispatch(addChannelSuccess({ task: response.data }));
+  };
+
+
+
   // console.log(showModal);
   const formik = useFormik({
     initialValues: {
-      newChannelName: '',
+      name: '',
     },
     validate,
     onSubmit: (values, { setSubmitting, resetForm }) => {
@@ -33,26 +52,16 @@ const AddChannelModal = (props) => {
       //   alert(JSON.stringify(values, null, 2));
       //   setSubmitting(false);
       // }, 400);      
-      // sendMessage(values, currentChannelId);
+      addChannel(values);
       console.log(values);
       setSubmitting(false);
       resetForm();
     },
-  });
-
-  // const handleSubmit = async (values, channelId) => {
-  //   console.log(values);
-  //   // const url = routes.channelMessagesPath(channelId);
-  //   // // const messageDate = new Date();
-  //   // const data = { data: { attributes: {...values, userName: 'Pavel2' } } };
-  //   // const response = await axios.post(url, { ...data });
-  //   // console.log(response.data);
-  //   // dispatch(addChannelSuccess({ task: response.data }));
-  // };
+  }); 
 
   return (
     // <Modal show={showModal} onHide={onHide} size="lg"
-    <Modal show={showModal} size="lg"
+    <Modal show={showModal} size="lg" onHide={hideModal}
         aria-labelledby="contained-modal-title-vcenter"
         centered animation='true'>
           <Modal.Header closeButton className="border-0 pb-0" >Добавить Канал!!!
@@ -64,7 +73,7 @@ const AddChannelModal = (props) => {
                   <div className="container col-sm-8">
                     <form onSubmit={formik.handleSubmit}>
                       <div className="form-group">
-                        <input type="text" className="form-control" name="newChannelName" {...formik.getFieldProps('newChannelName')}/>
+                        <input type="text" className="form-control" name="name" {...formik.getFieldProps('name')}/>
                       </div>
                       <button type="submit" className="btn btn-primary btn-block" width="100%" disabled={formik.isSubmitting}>Submit</button>
                     </form>

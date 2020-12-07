@@ -41,8 +41,11 @@ const currentChannelId = handleActions({
 }, 1);
 
 const modalState = handleActions({
-  [actions.selectChannel](state, { payload: { id } }) {
-    return id;
+  [actions.hideModal](state, {}) {
+    return { showModal: false };
+  },
+  [actions.showModal](state, {}) {
+    return { showModal: true };
   },
 }, { showModal: true });
 

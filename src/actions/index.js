@@ -17,6 +17,8 @@ export const addNewChannel = createAction('CHANNEL_ADD');
 export const removeChannel = createAction('CHANNEL_REMOVE');
 export const renameChannel = createAction('CHANNEL_RENAME');
 
+export const hideModal = createAction('MODAL_HIDE');
+
 // export const getMessage = createAction('CHANNEL_ADD_REQUEST');
 // export const getMessage = createAction('CHANNEL_ADD_REQUEST');
 
@@ -37,6 +39,7 @@ export const fetchChannels = () => async (dispatch) => {
       throw e;
     }
 };
+
 
 // export const sendMessage = ({ message }) => async (dispatch) => {
 //     dispatch(addChannelRequest());
