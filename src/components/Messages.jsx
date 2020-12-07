@@ -7,8 +7,12 @@ import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
   const { messagges: { byId, allIds }, currentChannelId } = state;
+  
   const messages = allIds.map((id) => byId[id]);
-  return { messages };
+  const currentChannelMessages = messages.filter((m) => m.channelId === currentChannelId);
+  // console.log(currentChannelMessages);
+  // console.log(currentChannelId);
+  return { messages: currentChannelMessages };
 };
 
 // const actionCreators = {
