@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import routes from '../routes.js';
-import * as actions from '../actions/index.js';
+import routes from '../../routes.js';
+import * as actions from '../../actions/index.js';
 
 const mapStateToProps = (state) => {
   // console.log(state);

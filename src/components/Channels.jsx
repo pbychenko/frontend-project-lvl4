@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
 import { ListGroup, Button } from 'react-bootstrap';
+import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
   // console.log(state);
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   selectChannel: actions.selectChannel,
+  showModal: actions.showModal,
 };
 
 const Channels = (props) => {
@@ -21,6 +22,12 @@ const Channels = (props) => {
     e.preventDefault();
     const { selectChannel } = props;
     selectChannel({ id: channelId });
+  };
+
+  const handleAddChannelButton = (e) => {
+    e.preventDefault();
+    const { showModal } = props;
+    showModal({ channelName: 'addChannelModal' });
   };
 
   return (
@@ -35,7 +42,7 @@ const Channels = (props) => {
               {channel.name}
           </ListGroup.Item>))}
           <Button variant="outline-info" type="submit" block 
-                // onClick={this.handleShowModal}
+                onClick={handleAddChannelButton}
                 >Add channel</Button>
       </ListGroup>);
 };

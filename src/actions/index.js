@@ -13,11 +13,14 @@ export const selectChannel = createAction('CHANNEL_SELECT');
 // export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
 
 export const getNewMessage = createAction('MESSAGE_GET');
-export const addNewChannel = createAction('CHANNEL_ADD');
-export const removeChannel = createAction('CHANNEL_REMOVE');
-export const renameChannel = createAction('CHANNEL_RENAME');
+export const getNewChannel = createAction('MESSAGE_GET');
+export const getRenamChannel = createAction('MESSAGE_GET');
+// export const addNewChannel = createAction('CHANNEL_ADD');
+// export const removeChannel = createAction('CHANNEL_REMOVE');
+// export const renameChannel = createAction('CHANNEL_RENAME');
 
 export const hideModal = createAction('MODAL_HIDE');
+export const showModal = createAction('MODAL_SHOW');
 
 // export const getMessage = createAction('CHANNEL_ADD_REQUEST');
 // export const getMessage = createAction('CHANNEL_ADD_REQUEST');
@@ -25,7 +28,6 @@ export const hideModal = createAction('MODAL_HIDE');
 // export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
 // export const sendMessageSuccess = createAction('MESSAGE_SEND_SUCCESS');
 // export const sendMessageFailure = createAction('MESSAGE_SEND_FAILURE');
-
 
 export const fetchChannels = () => async (dispatch) => {
     dispatch(fetchChannelsRequest());
@@ -40,6 +42,21 @@ export const fetchChannels = () => async (dispatch) => {
     }
 };
 
+export const sendMessage = async (values, channelId) => {
+  const url = routes.channelMessagesPath(channelId);
+  // const messageDate = new Date();
+  const data = { data: { attributes: { ...values, userName: 'Pavel2' } } };
+  await axios.post(url, { ...data });
+};
+
+export const addChannel = async (values) => {
+  // console.log(values);
+  const url = routes.channelsPath();
+  const data = { data: { attributes: { ...values } } };
+  await axios.post(url, { ...data });
+  // console.log(response.data);
+  // dispatch(addChannelSuccess({ task: response.data }));
+};
 
 // export const sendMessage = ({ message }) => async (dispatch) => {
 //     dispatch(addChannelRequest());
