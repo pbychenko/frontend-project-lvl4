@@ -7,6 +7,8 @@ import Message from './Message.jsx';
 
 const mapStateToProps = (state) => {
   const { messagges: { byId, allIds }, currentChannelId } = state;
+  console.log(byId);
+  console.log(allIds);
 
   const messages = allIds.map((id) => byId[id]);
   const currentChannelMessages = messages.filter((m) => m.channelId === currentChannelId);

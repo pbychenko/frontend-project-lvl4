@@ -79,7 +79,7 @@ const messagges = handleActions({
 
     return {
       byId: _.omitBy(byId, (message) => message.channelId === id),
-      allIds: _.without(allIds, deletedChannelMessageIds),
+      allIds: _.without(allIds, ...deletedChannelMessageIds),
     };
   },
 }, { byId: _.keyBy(messages, 'id'), allIds: messages.map((c) => c.id) });
@@ -90,7 +90,7 @@ const currentChannelId = handleActions({
   },
   [actions.getDeletedChannel](state, { payload }) {
     console.log('here');
-    return 2;
+    return 1;
   },
 }, 1);
 
