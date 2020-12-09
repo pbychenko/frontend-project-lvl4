@@ -10,7 +10,7 @@ import {
   Jumbotron,
 } from 'react-bootstrap';
 import AddChannelModal from './modals/AddChannelModal.jsx';
-// import EditChannelModal from './modals/AddChannelModal.jsx';
+import EditChannelModal from './modals/EditChannelModal.jsx';
 import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
@@ -33,12 +33,8 @@ const App = () => (
               >Add channel</Button>
               </ListGroup.Item> */}
             <AddChannelModal />
-            {/* <AddChannelModal /> */}
+            <EditChannelModal />
             <DeleteChannelModal />
-            {/* <MyModal show={showModal} onFormChange={this.handleChange}
-              onFormSubmit={this.handleAddChannel} newChannelName={newChannelName}
-              onHide={this.handleCloseModal}
-            /> */}
           </ListGroup>
         </Col>
         {/* <Col xs={2} md={1}>

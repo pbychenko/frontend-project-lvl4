@@ -4,19 +4,24 @@ export default (socket, store) => {
   // const baseUrl = 'http://localhost:5000';
   // const socket = io(baseUrl);
 
-  const { getNewMessage, getNewChannel, getDeletedChannel } = actions;
+  const { getNewMessage, getNewChannel, getDeletedChannel, getRenamedChannel } = actions;
   socket.on('newMessage', (data) => {
     // console.log(data);
     store.dispatch(getNewMessage(data));
   });
 
   socket.on('newChannel', (data) => {
-    console.log(data);
+    // console.log(data);
     store.dispatch(getNewChannel(data));
   });
 
   socket.on('removeChannel', (data) => {
-    console.log(data);
+    // console.log(data);
     store.dispatch(getDeletedChannel(data));
+  });
+
+  socket.on('renameChannel', (data) => {
+    // console.log(data);
+    store.dispatch(getRenamedChannel(data));
   });
 };

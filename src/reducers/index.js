@@ -31,13 +31,25 @@ const channells = handleActions({
   [actions.getDeletedChannel](state, { payload: { data: { id } } }) {
     // console.log(payload);
     const { byId, allIds } = state;
-    console.log('in reducer');
-    console.log(id);
-    console.log(state);
+    // console.log('in reducer');
+    // console.log(id);
+    // console.log(state);
 
     return {
       byId: _.omit(byId, id),
       allIds: _.without(allIds, id),
+    };
+  },
+  [actions.getRenamedChannel](state, { payload: { data: { attributes } } }) {
+    // // console.log(payload);
+    // const { byId, allIds } = state;
+    // console.log('in reducer');
+    // console.log(id);
+    // console.log(attributes);
+
+    return {
+      ...state,
+      byId: { ...state.byId, [attributes.id]: attributes },
     };
   },
 }, { byId: _.keyBy(channels, 'id'), allIds: channels.map((c) => c.id) });
@@ -54,11 +66,31 @@ const messagges = handleActions({
       allIds: [...allIds, attributes.id],
     };
   },
+  [actions.getDeletedChannel](state, { payload: { data: { id } } }) {
+    // console.log(payload);
+    const { byId, allIds } = state;
+    const deletedChannelMessageIds = Object.entries(byId)
+      .filter(([, value]) => value.channelId === id)
+      .map(([, value]) => value.id);
+    // console.log(Object.entries(byId).filter(([, value]) => value.channelId === id).map(([, value]) => value.id));
+    // console.log('in messages reducer');
+    // console.log(id);
+    // console.log(state);
+
+    return {
+      byId: _.omitBy(byId, (message) => message.channelId === id),
+      allIds: _.without(allIds, deletedChannelMessageIds),
+    };
+  },
 }, { byId: _.keyBy(messages, 'id'), allIds: messages.map((c) => c.id) });
 
 const currentChannelId = handleActions({
   [actions.selectChannel](state, { payload: { id } }) {
     return id;
+  },
+  [actions.getDeletedChannel](state, { payload }) {
+    console.log('here');
+    return 2;
   },
 }, 1);
 
