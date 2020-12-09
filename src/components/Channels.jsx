@@ -30,21 +30,41 @@ const Channels = (props) => {
     showModal({ channelName: 'addChannelModal' });
   };
 
+  const handleEditChannelButton = (e) => {
+    e.preventDefault();
+    const { showModal } = props;
+    showModal({ channelName: 'editChannelModal' });
+  };
+
+  const handleDeleteChannelButton = (e) => {
+    e.preventDefault();
+    const { showModal } = props;
+    showModal({ channelName: 'deleteChannelModal' });
+  };
+
   return (
-      <ListGroup variant="flush">
-        {channels.map((channel) => (
-          <ListGroup.Item
-              key={channel.id}
-              // style={{ wordWrap: 'break-word', textAlign: 'left' }}
-              onClick={handleSelectChannel(channel.id)}
-              className={ channel.id === currentChannelId ? 'active' : null}
-              >
-              {channel.name}
-          </ListGroup.Item>))}
-          <Button variant="outline-info" type="submit" block 
-                onClick={handleAddChannelButton}
-                >Add channel</Button>
-      </ListGroup>);
+    <ListGroup variant="flush">
+      {channels.map((channel) => (
+        <ListGroup.Item
+            key={channel.id}
+            // style={{ wordWrap: 'break-word', textAlign: 'left' }}
+            onClick={handleSelectChannel(channel.id)}
+            className={ channel.id === currentChannelId ? 'active' : null}
+            >
+            {channel.name}
+        </ListGroup.Item>
+      ))}
+      <Button variant="outline-info" type="submit" block onClick={handleAddChannelButton}>
+        Add channel
+      </Button>
+      <Button variant="outline-info" type="submit" block onClick={handleEditChannelButton}>
+        Edit channel
+      </Button>
+      <Button variant="outline-info" type="submit" block onClick={handleDeleteChannelButton}>
+        Delete channel
+      </Button>      
+    </ListGroup>
+  );
 };
 
 // export default Channels;

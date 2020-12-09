@@ -59,7 +59,7 @@ const modalState = handleActions({
   [actions.showModal](state, { payload: { channelName } }) {
     return { ...state, [channelName]: { show: true } };
   },
-}, { addChannelModal: { show: false }, removeChannelModal: { show: true } });
+}, { addChannelModal: { show: false }, editChannelModal: { show:  false }, deleteChannelModal: { show: false } });
 
 export default combineReducers({
   channells,

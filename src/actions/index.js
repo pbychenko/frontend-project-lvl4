@@ -58,6 +58,15 @@ export const addChannel = async (values) => {
   // dispatch(addChannelSuccess({ task: response.data }));
 };
 
+export const deleteChannel = async (channelId) => {
+  // console.log(values);
+  const url = routes.channelPath(channelId);
+  // const data = { data: { attributes: { ...values } } };
+  await axios.delete(url);
+  // console.log(response.data);
+  // dispatch(addChannelSuccess({ task: response.data }));
+};
+
 // export const sendMessage = ({ message }) => async (dispatch) => {
 //     dispatch(addChannelRequest());
 //     try {
