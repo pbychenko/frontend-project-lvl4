@@ -22,11 +22,22 @@ const channells = handleActions({
     const { byId, allIds } = state;
     // console.log('in reducer');
     // console.log(attributes);
-    // console.log(state);
 
     return {
       byId: { ...byId, [attributes.id]: attributes },
       allIds: [...allIds, attributes.id],
+    };
+  },
+  [actions.getDeletedChannel](state, { payload: { data: { id } } }) {
+    // console.log(payload);
+    const { byId, allIds } = state;
+    console.log('in reducer');
+    console.log(id);
+    console.log(state);
+
+    return {
+      byId: _.omit(byId, id),
+      allIds: _.without(allIds, id),
     };
   },
 }, { byId: _.keyBy(channels, 'id'), allIds: channels.map((c) => c.id) });

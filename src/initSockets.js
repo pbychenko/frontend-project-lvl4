@@ -4,7 +4,7 @@ export default (socket, store) => {
   // const baseUrl = 'http://localhost:5000';
   // const socket = io(baseUrl);
 
-  const { getNewMessage, getNewChannel } = actions;
+  const { getNewMessage, getNewChannel, getDeletedChannel } = actions;
   socket.on('newMessage', (data) => {
     // console.log(data);
     store.dispatch(getNewMessage(data));
@@ -13,5 +13,10 @@ export default (socket, store) => {
   socket.on('newChannel', (data) => {
     console.log(data);
     store.dispatch(getNewChannel(data));
+  });
+
+  socket.on('removeChannel', (data) => {
+    console.log(data);
+    store.dispatch(getDeletedChannel(data));
   });
 };
