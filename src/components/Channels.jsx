@@ -62,7 +62,7 @@ const Channels = (props) => {
       </Button>
       <Button variant="outline-info" type="submit" block onClick={handleDeleteChannelButton}>
         Delete channel
-      </Button>      
+      </Button>
     </ListGroup>
   );
 };

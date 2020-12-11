@@ -4,6 +4,9 @@ import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index.js';
 
+import axios from 'axios';
+import routes from '../../routes.js';
+
 const mapStateToProps = (state) => {
   const { modalState: { addChannelModal: { show } } } = state;
   return { show };
@@ -32,14 +35,41 @@ const AddChannelModal = (props) => {
       name: '',
     },
     validate,
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      actions.addChannel(values);
-      setSubmitting(false);
-      resetForm();
-      hideModal({ channelName: 'addChannelModal' });
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      // try {
+      //   actions.addChannel(values);
+      //   setSubmitting(false);
+      //   resetForm();
+      //   hideModal({ channelName: 'addChannelModal' });
+      // } catch (err) {
+      //   setSubmitting(true);
+      //   console.log('here');
+      // }
+      // actions.addChannel(values);
+      // setSubmitting(false);
+      // resetForm();
+      const url = routes.channelsPath();
+      const data = { data: { attributes: { ...values } } };
+      try {
+        await axios.post(url, { ...data });
+        // actions.addChannel(values);
+        // setSubmitting(false);
+        resetForm();
+      } catch (er) {
+        // setSubmitting(true);
+        console.log('herse');
+        // throw er;
+        console.log(er);
+      }
+      // actions.addChannel(values);
+      // // setSubmitting(false);
+      // resetForm();
+      // hideModal({ channelName: 'addChannelModal' });
     },
   });
-  // console.log(formik.isSubmitting);
+  // console.log(formik.errors);
+  // console.log(formik.status);
+  console.log(formik.isSubmitting);
 
   return (
     <Modal show={show} onHide={handleHideModal}

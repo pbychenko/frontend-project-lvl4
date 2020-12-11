@@ -54,7 +54,12 @@ export const addChannel = async (values) => {
   // console.log(values);
   const url = routes.channelsPath();
   const data = { data: { attributes: { ...values } } };
-  await axios.post(url, { ...data });
+  try {
+    await axios.post(url, { ...data });
+  } catch (er) {
+    throw er;
+  }
+  // await axios.post(url, { ...data });
   // console.log(response.data);
   // dispatch(addChannelSuccess({ task: response.data }));
 };

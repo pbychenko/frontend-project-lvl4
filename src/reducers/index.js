@@ -89,7 +89,7 @@ const currentChannelId = handleActions({
     return id;
   },
   [actions.getDeletedChannel](state, { payload }) {
-    console.log('here');
+    // console.log('here');
     return 1;
   },
 }, 1);
