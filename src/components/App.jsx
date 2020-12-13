@@ -15,7 +15,7 @@ import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import MessageForm from './MessageForm.jsx';
-import EditChannelElements from './EditChannelElements.jsx';
+// import EditChannelElements from './EditChannelElements.jsx';
 
 const App = () => (
   <>
@@ -37,9 +37,9 @@ const App = () => (
             <DeleteChannelModal />
           </ListGroup>
         </Col>
-        <Col xs={2} md={1}>
+        {/* <Col xs={2} md={1}>
           <EditChannelElements />
-        </Col>
+        </Col> */}
         <Col xs={12} md={7}>
           <>
             <Messages />

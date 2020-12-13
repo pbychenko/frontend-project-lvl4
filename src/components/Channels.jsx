@@ -53,22 +53,17 @@ const Channels = (props) => {
             >
             {/* {channel.name} */}
             <Nav className="mr-auto">
-      <Nav.Link href="#link" style = {{width:'90%'}}>{channel.name}</Nav.Link>
-      <NavDropdown id="basic-nav-dropdown" style = {{width:'10%'}}>
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-      </NavDropdown>
-    </Nav>
+              <Nav.Link href="#link" style = {{width:'90%'}}>{channel.name}</Nav.Link>
+              {channel.removable ?
+              (<NavDropdown id="basic-nav-dropdown" style = {{width:'10%'}}>
+                <NavDropdown.Item href="#action/3.1" onClick={handleEditChannelButton}>Edit</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2" onClick={handleDeleteChannelButton}>Delete</NavDropdown.Item>
+              </NavDropdown>) : null}
+            </Nav>
         </ListGroup.Item>
       ))}
       <Button variant="outline-info" type="submit" block onClick={handleAddChannelButton}>
         Add channel
-      </Button>
-      <Button variant="outline-info" type="submit" block onClick={handleEditChannelButton}>
-        Edit channel
-      </Button>
-      <Button variant="outline-info" type="submit" block onClick={handleDeleteChannelButton}>
-        Delete channel
       </Button>
     </ListGroup>
   );
