@@ -5,8 +5,8 @@ import 'regenerator-runtime/runtime';
 import '../assets/application.scss';
 import App from './components/App.jsx';
 
-// import faker from 'faker';
-// import cookies from 'js-cookie';
+import faker from 'faker';
+import cookies from 'js-cookie';
 import io from 'socket.io-client';
 import * as actions from './actions/index.js';
 
@@ -18,6 +18,16 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers/index.js';
 import { fetchChannels } from './actions/index.js';
 import initSocket from './initSockets';
+import UserContext from './initContext';
+
+// let userName = cookies.get('userName');
+
+if (!cookies.get('userName')) {
+  // userName = faker.name.findName();
+  cookies.set('userName', faker.name.findName());
+}
+
+const userName = cookies.get('userName');
 
 /* eslint-disable no-underscore-dangle */
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -45,7 +55,9 @@ export default () => {
 
   render(
     <Provider store={store}>
-      <App />
+      <UserContext.Provider value={userName}>
+        <App />
+      </UserContext.Provider>
     </Provider>, document.getElementById('chat'),
   );
 };

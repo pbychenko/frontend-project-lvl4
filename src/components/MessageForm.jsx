@@ -3,6 +3,10 @@ import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { sendMessage } from '../actions/index.js';
+import UserContext from '../initContext';
+import { useContext } from 'react';
+
+// const constextType = UserContext;
 
 const mapStateToProps = (state) => {
   const { currentChannelId } = state;
@@ -11,6 +15,11 @@ const mapStateToProps = (state) => {
 
 const MessageForm = (props) => {
   const { currentChannelId } = props;
+  const userName = useContext(UserContext);
+  // console.log('testContext');
+  // console.log(userName);
+  // console.log(userName);
+  // console.log(UserContext);
   const validate = (values) => {
     const errors = {};
     if (!values.text) {
@@ -25,12 +34,13 @@ const MessageForm = (props) => {
     },
     validate,
     onSubmit: (values, { setSubmitting, resetForm }) => {
-      sendMessage(values, currentChannelId);
+      sendMessage(values, userName, currentChannelId);
       setSubmitting(false);
       resetForm();
     },
   });
   // console.log(formik.isSubmitting);
+  // console.log(constextType);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

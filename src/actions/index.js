@@ -43,10 +43,10 @@ export const fetchChannels = () => async (dispatch) => {
     }
 };
 
-export const sendMessage = async (values, channelId) => {
+export const sendMessage = async (values, userName, channelId) => {
   const url = routes.channelMessagesPath(channelId);
   // const messageDate = new Date();
-  const data = { data: { attributes: { ...values, userName: 'Pavel2' } } };
+  const data = { data: { attributes: { ...values, userName } } };
   await axios.post(url, { ...data });
 };
 
