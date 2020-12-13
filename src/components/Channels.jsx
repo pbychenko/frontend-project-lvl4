@@ -19,7 +19,7 @@ const Channels = (props) => {
   const { channels, currentChannelId } = props;
 
   const handleSelectChannel = (channelId) => (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const { selectChannel } = props;
     selectChannel({ id: channelId });
   };
@@ -48,14 +48,14 @@ const Channels = (props) => {
         <ListGroup.Item
             key={channel.id}
             // style={{ wordWrap: 'break-word', textAlign: 'left' }}
-            onClick={handleSelectChannel(channel.id)}
+            
             className={ channel.id === currentChannelId ? 'active' : null}
             >
             {/* {channel.name} */}
-            <Nav className="mr-auto">
+            <Nav className="mr-auto" onSelect={handleSelectChannel(channel.id)}>
               <Nav.Link href="#link" style = {{width:'90%'}}>{channel.name}</Nav.Link>
               {channel.removable ?
-              (<NavDropdown id="basic-nav-dropdown" style = {{width:'10%'}}>
+              (<NavDropdown id="basic-nav-dropdown" title="" style = {{width:'10%'}}>
                 <NavDropdown.Item href="#action/3.1" onClick={handleEditChannelButton}>Edit</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2" onClick={handleDeleteChannelButton}>Delete</NavDropdown.Item>
               </NavDropdown>) : null}

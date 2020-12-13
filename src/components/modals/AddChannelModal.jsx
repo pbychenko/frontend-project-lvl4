@@ -55,6 +55,7 @@ const AddChannelModal = (props) => {
         // actions.addChannel(values);
         // setSubmitting(false);
         resetForm();
+        hideModal({ channelName: 'addChannelModal' });
       } catch (er) {
         // setSubmitting(true);
         console.log('herse');
