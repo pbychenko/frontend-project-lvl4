@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListGroup, Button } from 'react-bootstrap';
+import { ListGroup, Button, Nav, NavDropdown } from 'react-bootstrap';
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
@@ -51,7 +51,14 @@ const Channels = (props) => {
             onClick={handleSelectChannel(channel.id)}
             className={ channel.id === currentChannelId ? 'active' : null}
             >
-            {channel.name}
+            {/* {channel.name} */}
+            <Nav className="mr-auto">
+      <Nav.Link href="#link" style = {{width:'90%'}}>{channel.name}</Nav.Link>
+      <NavDropdown id="basic-nav-dropdown" style = {{width:'10%'}}>
+        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
         </ListGroup.Item>
       ))}
       <Button variant="outline-info" type="submit" block onClick={handleAddChannelButton}>

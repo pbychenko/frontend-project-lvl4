@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListGroup, Button } from 'react-bootstrap';
+import { ListGroup, Button, Dropdown } from 'react-bootstrap';
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
@@ -19,9 +19,21 @@ const EditChannelElements = ({ channels, currentChannelId }) => {
       {channels.map((channel) => (
       <ListGroup.Item
         key={channel.id}
-        style={{ cursor: 'pointer' }}
-           onClick={() => alert(channel.name)}
-      >{channel.removable === false ? '': '...'}
+        style={{ cursor: 'pointer', height: "49px" }}
+          //  onClick={() => alert(channel.name)}
+      >{channel.removable === false ? '': 
+      (<Dropdown>
+        <Dropdown.Toggle >
+          
+        </Dropdown.Toggle>
+      
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">Remove</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Rename</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      )}
         </ListGroup.Item>))}
     </ListGroup>
   );
