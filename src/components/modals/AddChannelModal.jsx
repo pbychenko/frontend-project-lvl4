@@ -1,10 +1,9 @@
-import React from 'react';
-import { Modal, Card, Form, Button } from 'react-bootstrap';
-import { useFormik } from 'formik';
+import React, { useRef, useEffect } from 'react';
+import axios from 'axios';
+import { Modal, Card, Form, Button, InputGroup } from 'react-bootstrap';
+import { Field, useFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index.js';
-
-import axios from 'axios';
 import routes from '../../routes.js';
 
 const mapStateToProps = (state) => {
@@ -53,29 +52,43 @@ const AddChannelModal = (props) => {
       try {
         await axios.post(url, { ...data });
         // actions.addChannel(values);
-        // setSubmitting(false);
+        setSubmitting(false);
         resetForm();
         hideModal({ channelName: 'addChannelModal' });
       } catch (er) {
-        // setSubmitting(true);
+        setSubmitting(true);
         console.log('herse');
-        // throw er;
-        console.log(er);
+        throw er;
+        // console.log(er);
       }
-      // actions.addChannel(values);
-      // // setSubmitting(false);
-      // resetForm();
-      // hideModal({ channelName: 'addChannelModal' });
     },
   });
   // console.log(formik.errors);
   // console.log(formik.status);
-  console.log(formik.isSubmitting);
+  // console.log(props.show)
+  // const inputRef = useRef(null);
+  // console.log(props.in)
+  // if (show) {
+  //   const inputEl = useRef(null);
+  //   useEffect(() => {
+  //     console.log(inputEl.current);
+  //     inputEl.current.focus();
+  //   }, [inputEl]);
+  // }
+
+  const inputEl = show ? useRef(null) : null;
+  if (show) {
+    useEffect(() => {
+    console.log(inputEl.current);
+    inputEl.current.focus();
+    }, [inputEl]);
+  }
 
   return (
     <Modal show={show} onHide={handleHideModal}
       aria-labelledby="contained-modal-title-vcenter"
       centered animation='true'
+      
     >
       <Modal.Header closeButton>
         <Modal.Title>Добавить канал</Modal.Title>
@@ -85,7 +98,7 @@ const AddChannelModal = (props) => {
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group>
-                <Form.Control type="text" placeholder="Введите имя нового канала" name="name" {...formik.getFieldProps('name')} />
+                <Form.Control type="text" placeholder="Введите имя нового канала" name="name" {...formik.getFieldProps('name')} ref={show ? inputEl : null} />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>
                 ) : null}

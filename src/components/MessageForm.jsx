@@ -16,10 +16,6 @@ const mapStateToProps = (state) => {
 const MessageForm = (props) => {
   const { currentChannelId } = props;
   const userName = useContext(UserContext);
-  // console.log('testContext');
-  // console.log(userName);
-  // console.log(userName);
-  // console.log(UserContext);
   const validate = (values) => {
     const errors = {};
     if (!values.text) {

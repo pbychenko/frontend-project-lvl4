@@ -15,7 +15,7 @@ import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import MessageForm from './MessageForm.jsx';
-// import EditChannelElements from './EditChannelElements.jsx';
+import EditChannelElements from './EditChannelElements.jsx';
 
 const App = () => (
   <>
@@ -24,29 +24,24 @@ const App = () => (
     </Jumbotron>
     <Container>
       <Row>
-        <Col xs={10} md={4}>
+        <Col xs={10} md={3}>
           <ListGroup variant="flush">
             <Channels />
-            {/* <ListGroup.Item>
-              <Button variant="outline-info" type="submit" block 
-              // onClick={this.handleShowModal}
-              >Add channel</Button>
-              </ListGroup.Item> */}
-            <AddChannelModal />
-            <EditChannelModal />
-            <DeleteChannelModal />
           </ListGroup>
         </Col>
         {/* <Col xs={2} md={1}>
           <EditChannelElements />
         </Col> */}
-        <Col xs={12} md={7}>
+        <Col xs={12} md={8}>
           <>
             <Messages />
             <MessageForm />
           </>
         </Col>
       </Row>
+      <AddChannelModal />
+      <EditChannelModal />
+      <DeleteChannelModal />
     </Container>
   </>
 );

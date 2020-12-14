@@ -22,7 +22,7 @@ const EditChannelElements = ({ channels, currentChannelId }) => {
         style={{ cursor: 'pointer', height: "49px" }}
           //  onClick={() => alert(channel.name)}
       >{channel.removable === false ? '': 
-      (<Dropdown>
+      (<Dropdown hidden={channel.id !== currentChannelId}>
         <Dropdown.Toggle >
           
         </Dropdown.Toggle>
