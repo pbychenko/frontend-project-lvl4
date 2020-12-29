@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { sendMessage } from '../actions/index.js';
 import UserContext from '../initContext';
-import { useContext } from 'react';
-
-// const constextType = UserContext;
 
 const mapStateToProps = (state) => {
   const { currentChannelId } = state;
@@ -16,14 +13,7 @@ const mapStateToProps = (state) => {
 const MessageForm = (props) => {
   const { currentChannelId } = props;
   const userName = useContext(UserContext);
-  const validate = (values) => {
-    const errors = {};
-    if (!values.text) {
-      errors.text = 'Required';
-    }
-
-    return errors;
-  };
+  const validate = (values) => ((!values.text) ? { text: 'Введите сообщение' } : {});
   const formik = useFormik({
     initialValues: {
       text: '',
@@ -39,16 +29,16 @@ const MessageForm = (props) => {
   // console.log(constextType);
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
+    <Form onSubmit={formik.handleSubmit} style={{ marginLeft: '20px', marginRight: '-35px' }}>
       <Form.Row>
-        <Col lg={10} xs={12} style={{ marginBottom: '10px' }}>
-          <Form.Control type="text" placeholder="Write your message here" name="text" {...formik.getFieldProps('text')} />
+        <Col md={10} xs={12}>
+          <Form.Control type="text" placeholder="Write your message here" name="text" { ...formik.getFieldProps('text')} />
           {formik.touched.text && formik.errors.text ? (
             <div>{formik.errors.text}</div>
           ) : null}
         </Col>
-        <Col lg={2} xs={12}>
-          <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>Send</Button>
+        <Col md={1} xs={12}>
+          <Button type="submit" disabled={formik.isSubmitting}>Send</Button>
         </Col>
       </Form.Row>
     </Form>

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Spinner,
-  Alert,
+  // Spinner,
+  // Alert,
   ListGroup,
   Container,
   Row,
   Col,
-  Button,
+  // Button,
   Jumbotron,
 } from 'react-bootstrap';
 import AddChannelModal from './modals/AddChannelModal.jsx';
@@ -15,7 +15,7 @@ import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import MessageForm from './MessageForm.jsx';
-import EditChannelElements from './EditChannelElements.jsx';
+// import EditChannelElements from './EditChannelElements.jsx';
 
 const App = () => (
   <>

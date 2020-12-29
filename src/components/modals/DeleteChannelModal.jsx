@@ -16,22 +16,11 @@ const actionCreators = {
 const DeleteChannelModal = (props) => {
   const { show, hideModal, currentChannelId } = props;
   const handleHideModal = () => {
-    // const { hideModal } = props;
     hideModal({ channelName: 'deleteChannelModal' });
   };
-  // const validate = (values) => {
-  //   const errors = {};
-  //   if (!values.name) {
-  //     errors.name = 'Required';
-  //   }
-
-  //   return errors;
-  // };
   const formik = useFormik({
     initialValues: {
-      // name: '',
     },
-    // validate,
     onSubmit: (values, { setSubmitting, resetForm }) => {
       // console.log(values);
       actions.deleteChannel(currentChannelId);
@@ -54,12 +43,6 @@ const DeleteChannelModal = (props) => {
         <Card>
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
-              {/* <Form.Group>
-                <Form.Control type="text" placeholder="Введите имя нового канала" name="name" {...formik.getFieldProps('name')} />
-                {formik.touched.name && formik.errors.name ? (
-                  <div>{formik.errors.name}</div>
-                ) : null}
-              </Form.Group> */}
               <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>Удалить</Button>
             </Form>
           </Card.Body>

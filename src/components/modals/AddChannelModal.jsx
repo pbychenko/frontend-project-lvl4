@@ -59,37 +59,37 @@ const AddChannelModal = (props) => {
         setSubmitting(true);
         console.log('herse');
         throw er;
-        // console.log(er);
       }
     },
   });
   // console.log(formik.errors);
   // console.log(formik.status);
   // console.log(props.show)
-  // const inputRef = useRef(null);
-  // console.log(props.in)
+  
+  const inputEl = useRef(null);
   // if (show) {
-  //   const inputEl = useRef(null);
   //   useEffect(() => {
-  //     console.log(inputEl.current);
-  //     inputEl.current.focus();
+  //   console.log('here')
+  //   console.log(inputEl.current);
+  //   inputEl.current.focus();
   //   }, [inputEl]);
+  // } else {
+  //   useEffect(() => {
+  //     console.log('heres')
+  //     inputEl.current = null;
+  //     }, [inputEl]);
   // }
 
-  const inputEl = show ? useRef(null) : null;
-  if (show) {
-    useEffect(() => {
-    console.log(inputEl.current);
-    inputEl.current.focus();
-    }, [inputEl]);
-  }
-
   return (
-    <Modal show={show} onHide={handleHideModal}
+    <Modal show={show} onHide={handleHideModal} style={{ hidden: true }}
       aria-labelledby="contained-modal-title-vcenter"
       centered animation='true'
-      
+      // autoFocus
+      // backdrop="static"
+      // keyboard={false}
+      onEntered={() => inputEl.current.focus()}
     >
+      {/* <Modal.Dialog> */}
       <Modal.Header closeButton>
         <Modal.Title>Добавить канал</Modal.Title>
       </Modal.Header>
@@ -98,7 +98,9 @@ const AddChannelModal = (props) => {
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group>
-                <Form.Control type="text" placeholder="Введите имя нового канала" name="name" {...formik.getFieldProps('name')} ref={show ? inputEl : null} />
+                <Form.Control type="text" autoFocus placeholder="Введите имя нового канала" name="name"
+                {...formik.getFieldProps('name')}
+                ref={inputEl} />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>
                 ) : null}
@@ -108,6 +110,7 @@ const AddChannelModal = (props) => {
           </Card.Body>
         </Card>
       </Modal.Body>
+      {/* </Modal.Dialog> */}
     </Modal>
   );
 };
