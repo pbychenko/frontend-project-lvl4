@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListGroup, Button, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import {
+  ListGroup,
+  Button,
+  Nav,
+  NavDropdown,
+} from 'react-bootstrap';
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
@@ -16,7 +21,8 @@ const actionCreators = {
 };
 
 const Channels = (props) => {
-  const { channels, currentChannelId } = props;
+  // const { channels, currentChannelId } = props;
+  const { channels } = props;
 
   const handleSelectChannel = (channelId) => () => {
     const { selectChannel } = props;
@@ -48,10 +54,8 @@ const Channels = (props) => {
           key={channel.id}
           // className={ channel.id === currentChannelId ? 'active' : null}
           onClick={handleSelectChannel(channel.id)}
-          // variant="light"
           style={{ wordWrap: 'break-word', borderStyle: 'none' }}
         >
-          {/* {channel.name} */}
           <Nav>
             <Nav.Link href="" style={{ width: '90%' }}>{channel.name}</Nav.Link>
             {channel.removable ? (

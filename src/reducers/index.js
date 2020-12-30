@@ -4,23 +4,14 @@ import { handleActions } from 'redux-actions';
 import gon from 'gon';
 import * as actions from '../actions/index.js';
 
-const { channels, currentChannelsId, messages } = gon;
+// const { channels, currentChannelsId, messages } = gon;
+const { channels, messages } = gon;
 // const byId = _.keyBy(channels, 'id');
 // const allIds = channels.map(c => c.id);
 
 const channells = handleActions({
-  // [actions.fetchChannelsSuccess](state, { payload }) {
-  //   // console.log(payload);
-
-  //   return {
-  //     byId: _.keyBy(payload.channels, 'id'),
-  //     allIds: payload.channels.map((t) => t.id),
-  //   };
-  // },
   [actions.getNewChannel](state, { payload: { data: { attributes } } }) {
-    // console.log(payload);
     const { byId, allIds } = state;
-    // console.log('in reducer');
     // console.log(attributes);
 
     return {
@@ -29,11 +20,7 @@ const channells = handleActions({
     };
   },
   [actions.getDeletedChannel](state, { payload: { data: { id } } }) {
-    // console.log(payload);
     const { byId, allIds } = state;
-    // console.log('in reducer');
-    // console.log(id);
-    // console.log(state);
 
     return {
       byId: _.omit(byId, id),
@@ -41,12 +28,6 @@ const channells = handleActions({
     };
   },
   [actions.getRenamedChannel](state, { payload: { data: { attributes } } }) {
-    // // console.log(payload);
-    // const { byId, allIds } = state;
-    // console.log('in reducer');
-    // console.log(id);
-    // console.log(attributes);
-
     return {
       ...state,
       byId: { ...state.byId, [attributes.id]: attributes },
@@ -56,7 +37,6 @@ const channells = handleActions({
 
 const messagges = handleActions({
   [actions.getNewMessage](state, { payload: { data: { attributes } } }) {
-    // console.log(payload);
     const { byId, allIds } = state;
     // console.log('in reducer');
     // console.log(attributes);
@@ -67,15 +47,12 @@ const messagges = handleActions({
     };
   },
   [actions.getDeletedChannel](state, { payload: { data: { id } } }) {
-    // console.log(payload);
     const { byId, allIds } = state;
     const deletedChannelMessageIds = Object.entries(byId)
       .filter(([, value]) => value.channelId === id)
       .map(([, value]) => value.id);
-    // console.log(Object.entries(byId).filter(([, value]) => value.channelId === id).map(([, value]) => value.id));
     // console.log('in messages reducer');
     // console.log(id);
-    // console.log(state);
 
     return {
       byId: _.omitBy(byId, (message) => message.channelId === id),
@@ -88,8 +65,7 @@ const currentChannelId = handleActions({
   [actions.selectChannel](state, { payload: { id } }) {
     return id;
   },
-  [actions.getDeletedChannel](state, { payload }) {
-    // console.log('here');
+  [actions.getDeletedChannel]() {
     return 1;
   },
 }, 1);

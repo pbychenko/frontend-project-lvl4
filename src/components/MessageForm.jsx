@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { sendMessage } from '../actions/index.js';
 import UserContext from '../initContext';
+import routes from '../routes.js';
 
 const mapStateToProps = (state) => {
   const { currentChannelId } = state;
@@ -15,30 +16,35 @@ const MessageForm = (props) => {
   const userName = useContext(UserContext);
   const validate = (values) => ((!values.text) ? { text: 'Введите сообщение' } : {});
   const formik = useFormik({
-    initialValues: {
-      text: '',
-    },
+    initialValues: { text: '' },
     validate,
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      sendMessage(values, userName, currentChannelId);
-      setSubmitting(false);
-      resetForm();
+    onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
+      const url = routes.channelMessagesPath(currentChannelId);
+      const messageDate = new Date();
+      const data = { data: { attributes: { ...values, userName, messageDate } } };
+      try {
+        await axios.post(url, { ...data });
+        setSubmitting(false);
+        resetForm();
+      } catch (er) {
+        setSubmitting(true);
+        setFieldError('text', 'c сетью что-то не так');
+      }
     },
   });
-  // console.log(formik.isSubmitting);
-  // console.log(constextType);
+  // console.log(formik);
 
   return (
     <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <Form.Row>
         <Col md={10} xs={12}>
           <Form.Control type="text" placeholder="Write your message here" name="text" { ...formik.getFieldProps('text')} />
-          {formik.touched.text && formik.errors.text ? (
-            <div>{formik.errors.text}</div>
+          {((formik.touched.text && formik.errors.text) || formik.isSubmitting) ? (
+            <span>{formik.errors.text}</span>
           ) : null}
         </Col>
         <Col md={2} xs={12}>
-          <Button type="submit" disabled={formik.isSubmitting} block>Send</Button>
+          <Button type="submit" disabled={formik.isSubmitting || !formik.dirty} block>Send</Button>
         </Col>
       </Form.Row>
     </Form>

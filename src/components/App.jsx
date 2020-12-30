@@ -15,7 +15,6 @@ import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import MessageForm from './MessageForm.jsx';
-// import EditChannelElements from './EditChannelElements.jsx';
 
 const App = () => (
   <>
@@ -24,14 +23,11 @@ const App = () => (
     </Jumbotron>
     <Container>
       <Row>
-        <Col xs={10} md={3}>
+        <Col xs={12} md={4}>
           <ListGroup variant="flush">
             <Channels />
           </ListGroup>
         </Col>
-        {/* <Col xs={2} md={1}>
-          <EditChannelElements />
-        </Col> */}
         <Col xs={12} md={8}>
           <>
             <Messages />

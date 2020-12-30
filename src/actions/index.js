@@ -15,23 +15,29 @@ export const getDeletedChannel = createAction('CHANNEL_DELETE');
 export const hideModal = createAction('MODAL_HIDE');
 export const showModal = createAction('MODAL_SHOW');
 
-export const sendMessage = async (values, userName, channelId) => {
-  const url = routes.channelMessagesPath(channelId);
-  // const messageDate = new Date();
-  const data = { data: { attributes: { ...values, userName } } };
-  await axios.post(url, { ...data });
-};
+// export const sendMessage = async (values, userName, channelId) => {
+//   const url = routes.channelMessagesPath(channelId);
+//   // const messageDate = new Date();
+//   const data = { data: { attributes: { ...values, userName } } };
+//   await axios.post(url, { ...data });
+//   // try {
+//   //   await axios.post(url, { ...data });
+//   // } catch (er) {
+//   //   console.log('ssss');
+//   //   throw er;
+//   // }
+// };
 
-export const addChannel = async (values) => {
+export const addChannel = (values) => {
   // console.log(values);
   const url = routes.channelsPath();
   const data = { data: { attributes: { ...values } } };
-  try {
-    await axios.post(url, { ...data });
-  } catch (er) {
-    throw er;
-  }
-  // await axios.post(url, { ...data });
+  // try {
+  //   axios.post(url, { ...data });
+  // } catch (er) {
+  //   throw er;
+  // }
+  axios.post(url, { ...data });
   // console.log(response.data);
   // dispatch(addChannelSuccess({ task: response.data }));
 };
