@@ -29,7 +29,7 @@ const MessageForm = (props) => {
   // console.log(constextType);
 
   return (
-    <Form onSubmit={formik.handleSubmit} style={{ marginLeft: '20px', marginRight: '-35px' }}>
+    <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <Form.Row>
         <Col md={10} xs={12}>
           <Form.Control type="text" placeholder="Write your message here" name="text" { ...formik.getFieldProps('text')} />
@@ -37,8 +37,8 @@ const MessageForm = (props) => {
             <div>{formik.errors.text}</div>
           ) : null}
         </Col>
-        <Col md={1} xs={12}>
-          <Button type="submit" disabled={formik.isSubmitting}>Send</Button>
+        <Col md={2} xs={12}>
+          <Button type="submit" disabled={formik.isSubmitting} block>Send</Button>
         </Col>
       </Form.Row>
     </Form>

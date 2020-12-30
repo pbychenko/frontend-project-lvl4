@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListGroup, Button, Nav, NavDropdown } from 'react-bootstrap';
+import { ListGroup, Button, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
@@ -45,23 +45,25 @@ const Channels = (props) => {
     <ListGroup variant="flush">
       {channels.map((channel) => (
         <ListGroup.Item
-            key={channel.id}
-            // style={{ wordWrap: 'break-word', textAlign: 'left' }}
-            className={ channel.id === currentChannelId ? 'active' : null}
-            onClick={handleSelectChannel(channel.id)}
-            >
-            {/* {channel.name} */}
-            <Nav className="mr-auto" onSelect={handleSelectChannel(channel.id)} defaultActiveKey="/">
-              <Nav.Link href="#link" style={{width:'90%'}}>{channel.name}</Nav.Link>
-              {channel.removable ?
-              (<NavDropdown id="basic-nav-dropdown" title="" style = {{width:'10%'}}>
-                <NavDropdown.Item href="#action/3.1" onClick={handleEditChannelButton}>Edit</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2" onClick={handleDeleteChannelButton}>Delete</NavDropdown.Item>
-              </NavDropdown>) : null}
-            </Nav>
+          key={channel.id}
+          // className={ channel.id === currentChannelId ? 'active' : null}
+          onClick={handleSelectChannel(channel.id)}
+          // variant="light"
+          style={{ wordWrap: 'break-word', borderStyle: 'none' }}
+        >
+          {/* {channel.name} */}
+          <Nav>
+            <Nav.Link href="" style={{ width: '90%' }}>{channel.name}</Nav.Link>
+            {channel.removable ? (
+              <NavDropdown id="basic-nav-dropdown" title="" style={{ width: '10%' }}>
+                <NavDropdown.Item href="" onClick={handleEditChannelButton}>Edit</NavDropdown.Item>
+                <NavDropdown.Item href="" onClick={handleDeleteChannelButton}>Delete</NavDropdown.Item>
+              </NavDropdown>
+            ) : null}
+          </Nav>
         </ListGroup.Item>
       ))}
-      <Button variant="outline-info" type="submit" block onClick={handleAddChannelButton}>
+      <Button type="submit" block onClick={handleAddChannelButton}>
         Add channel
       </Button>
     </ListGroup>

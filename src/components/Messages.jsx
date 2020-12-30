@@ -27,7 +27,7 @@ const Messages = (props) => {
   return (
     <ListGroup variant="flush">
       {messages.map((message) => (
-        <ListGroup.Item key={_.uniqueId()} style={{ wordWrap: 'break-word', textAlign: 'right' }}>
+        <ListGroup.Item key={_.uniqueId()} style={{ wordWrap: 'break-word', textAlign: 'right', borderStyle: 'none' }}>
           <Message userName={message.userName} text={message.text} date={message.date} />
         </ListGroup.Item>
       ))}
