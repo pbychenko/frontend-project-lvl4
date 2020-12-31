@@ -8,12 +8,12 @@ import {
 } from 'react-bootstrap';
 import getModal from './modals/index';
 import * as actions from '../actions/index.js';
+import { channelsSelector } from '../selectors';
 
 const mapStateToProps = (state) => {
-  // console.log(state);
-  const { channells: { byId, allIds }, currentChannelId, modalState: { modalName } } = state;
-  const channels = allIds.map((id) => byId[id]);
-  // console.log(modalName);
+  const { currentChannelId, modalState: { modalName } } = state;
+  // const channels = allIds.map((id) => byId[id]);
+  const channels = channelsSelector(state);
   return { channels, currentChannelId, modalName };
 };
 

@@ -3,11 +3,10 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import Message from './Message.jsx';
+import { currentChannelMessagesSelector } from '../selectors';
 
 const mapStateToProps = (state) => {
-  const { messagges: { byId, allIds }, currentChannelId } = state;
-  const messages = allIds.map((id) => byId[id]);
-  const currentChannelMessages = messages.filter((m) => m.channelId === currentChannelId);
+  const currentChannelMessages = currentChannelMessagesSelector(state);
   return { messages: currentChannelMessages };
 };
 
