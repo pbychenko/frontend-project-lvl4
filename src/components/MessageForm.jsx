@@ -32,14 +32,13 @@ const MessageForm = (props) => {
       }
     },
   });
-  // console.log(formik);
 
   return (
     <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <Form.Row>
         <Col md={10} xs={12}>
           <Form.Control type="text" placeholder="Write your message here" name="text" { ...formik.getFieldProps('text')} />
-          {((formik.touched.text && formik.errors.text) || formik.isSubmitting) ? (
+          {((formik.touched.text && formik.errors.text)) ? (
             <span>{formik.errors.text}</span>
           ) : null}
         </Col>

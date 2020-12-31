@@ -1,12 +1,16 @@
 import React from 'react';
-import { Modal, Card, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
+import {
+  Modal, Card, Form, Button,
+} from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index.js';
+import routes from '../../routes.js';
 
 const mapStateToProps = (state) => {
-  const { modalState: { deleteChannelModal: { show } }, currentChannelId } = state;
-  return { show, currentChannelId };
+  const { currentChannelId } = state;
+  return { currentChannelId };
 };
 
 const actionCreators = {
@@ -14,27 +18,33 @@ const actionCreators = {
 };
 
 const DeleteChannelModal = (props) => {
-  const { show, hideModal, currentChannelId } = props;
+  const { hideModal, currentChannelId } = props;
   const handleHideModal = () => {
-    hideModal({ channelName: 'deleteChannelModal' });
+    hideModal();
   };
   const formik = useFormik({
-    initialValues: {
-    },
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      // console.log(values);
-      actions.deleteChannel(currentChannelId);
-      setSubmitting(false);
-      resetForm();
-      hideModal({ channelName: 'deleteChannelModal' });
+    initialValues: {},
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      const url = routes.channelPath(currentChannelId);
+      try {
+        await axios.delete(url);
+        setSubmitting(false);
+        resetForm();
+        hideModal();
+      } catch (er) {
+        setSubmitting(true);
+        throw er;
+      }
     },
   });
-  // console.log(formik.isSubmitting);
 
   return (
-    <Modal show={show} onHide={handleHideModal}
+    <Modal
+      show
+      onHide={handleHideModal}
       aria-labelledby="contained-modal-title-vcenter"
-      centered animation='true'
+      centered
+      animation
     >
       <Modal.Header closeButton>
         <Modal.Title>Вы уверены, что хотите удалить канал?</Modal.Title>
@@ -43,7 +53,7 @@ const DeleteChannelModal = (props) => {
         <Card>
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
-              <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>Удалить</Button>
+              <Button variant="primary" type="submit" block>Удалить</Button>
             </Form>
           </Card.Body>
         </Card>

@@ -6,13 +6,15 @@ import {
   Nav,
   NavDropdown,
 } from 'react-bootstrap';
+import getModal from './modals/index';
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
   // console.log(state);
-  const { channells: { byId, allIds }, currentChannelId } = state;
+  const { channells: { byId, allIds }, currentChannelId, modalState: { modalName } } = state;
   const channels = allIds.map((id) => byId[id]);
-  return { channels, currentChannelId };
+  // console.log(modalName);
+  return { channels, currentChannelId, modalName };
 };
 
 const actionCreators = {
@@ -22,7 +24,7 @@ const actionCreators = {
 
 const Channels = (props) => {
   // const { channels, currentChannelId } = props;
-  const { channels } = props;
+  const { channels, modalName } = props;
 
   const handleSelectChannel = (channelId) => () => {
     const { selectChannel } = props;
@@ -32,19 +34,19 @@ const Channels = (props) => {
   const handleAddChannelButton = (e) => {
     e.preventDefault();
     const { showModal } = props;
-    showModal({ channelName: 'addChannelModal' });
+    showModal({ modalName: 'addChannelModal' });
   };
 
   const handleEditChannelButton = (e) => {
     e.preventDefault();
     const { showModal } = props;
-    showModal({ channelName: 'editChannelModal' });
+    showModal({ modalName: 'editChannelModal' });
   };
 
   const handleDeleteChannelButton = (e) => {
     e.preventDefault();
     const { showModal } = props;
-    showModal({ channelName: 'deleteChannelModal' });
+    showModal({ modalName: 'deleteChannelModal' });
   };
 
   return (
@@ -70,6 +72,7 @@ const Channels = (props) => {
       <Button type="submit" block onClick={handleAddChannelButton}>
         Add channel
       </Button>
+      {getModal(modalName)}
     </ListGroup>
   );
 };

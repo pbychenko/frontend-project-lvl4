@@ -9,9 +9,9 @@ import {
   // Button,
   Jumbotron,
 } from 'react-bootstrap';
-import AddChannelModal from './modals/AddChannelModal.jsx';
-import EditChannelModal from './modals/EditChannelModal.jsx';
-import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
+// import AddChannelModal from './modals/AddChannelModal.jsx';
+// import EditChannelModal from './modals/EditChannelModal.jsx';
+// import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import MessageForm from './MessageForm.jsx';
@@ -35,9 +35,10 @@ const App = () => (
           </>
         </Col>
       </Row>
-      <AddChannelModal />
+      {/* <AddChannelModal />
       <EditChannelModal />
-      <DeleteChannelModal />
+      <DeleteChannelModal /> */}
+      {/* {getModal()} */}
     </Container>
   </>
 );

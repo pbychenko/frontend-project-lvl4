@@ -1,12 +1,16 @@
-import React from 'react';
-import { Modal, Card, Form, Button } from 'react-bootstrap';
+import React, { useRef } from 'react';
+import axios from 'axios';
+import {
+  Modal, Card, Form, Button,
+} from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index.js';
+import routes from '../../routes.js';
 
 const mapStateToProps = (state) => {
-  const { modalState: { editChannelModal: { show } }, currentChannelId } = state;
-  return { show, currentChannelId };
+  const { currentChannelId } = state;
+  return { currentChannelId };
 };
 
 const actionCreators = {
@@ -14,10 +18,9 @@ const actionCreators = {
 };
 
 const EditChannelModal = (props) => {
-  const { show, hideModal, currentChannelId } = props;
+  const { hideModal, currentChannelId } = props;
   const handleHideModal = () => {
-    // const { hideModal } = props;
-    hideModal({ channelName: 'editChannelModal' });
+    hideModal();
   };
   const validate = (values) => {
     const errors = {};
@@ -32,19 +35,31 @@ const EditChannelModal = (props) => {
       name: '',
     },
     validate,
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      actions.renameChannel(values, currentChannelId);
-      setSubmitting(false);
-      resetForm();
-      hideModal({ channelName: 'editChannelModal' });
+    onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
+      const url = routes.channelPath(currentChannelId);
+      const data = { data: { attributes: { ...values } } };
+      try {
+        await axios.patch(url, { ...data });
+        setSubmitting(false);
+        resetForm();
+        hideModal();
+      } catch (er) {
+        setSubmitting(true);
+        setFieldError('name', 'c сетью что-то не так');
+        throw er;
+      }
     },
   });
-  // console.log(formik.isSubmitting);
+  const inputEl = useRef(null);
 
   return (
-    <Modal show={show} onHide={handleHideModal}
+    <Modal
+      show
+      onHide={handleHideModal}
       aria-labelledby="contained-modal-title-vcenter"
-      centered animation='true'
+      centered
+      animation
+      onEntered={() => inputEl.current.focus()}
     >
       <Modal.Header closeButton>
         <Modal.Title>Изменить канал</Modal.Title>
@@ -54,7 +69,7 @@ const EditChannelModal = (props) => {
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group>
-                <Form.Control type="text" placeholder="Введите имя нового канала" name="name" {...formik.getFieldProps('name')} />
+                <Form.Control type="text" placeholder="Введите имя нового канала" {...formik.getFieldProps('name')} ref={inputEl} />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>
                 ) : null}

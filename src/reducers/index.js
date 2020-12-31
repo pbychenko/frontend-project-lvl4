@@ -6,8 +6,6 @@ import * as actions from '../actions/index.js';
 
 // const { channels, currentChannelsId, messages } = gon;
 const { channels, messages } = gon;
-// const byId = _.keyBy(channels, 'id');
-// const allIds = channels.map(c => c.id);
 
 const channells = handleActions({
   [actions.getNewChannel](state, { payload: { data: { attributes } } }) {
@@ -38,8 +36,6 @@ const channells = handleActions({
 const messagges = handleActions({
   [actions.getNewMessage](state, { payload: { data: { attributes } } }) {
     const { byId, allIds } = state;
-    // console.log('in reducer');
-    // console.log(attributes);
 
     return {
       byId: { ...byId, [attributes.id]: attributes },
@@ -51,8 +47,6 @@ const messagges = handleActions({
     const deletedChannelMessageIds = Object.entries(byId)
       .filter(([, value]) => value.channelId === id)
       .map(([, value]) => value.id);
-    // console.log('in messages reducer');
-    // console.log(id);
 
     return {
       byId: _.omitBy(byId, (message) => message.channelId === id),
@@ -71,14 +65,13 @@ const currentChannelId = handleActions({
 }, 1);
 
 const modalState = handleActions({
-  [actions.hideModal](state, { payload: { channelName } }) {
-    // console.log(payload);
-    return { ...state, [channelName]: { show: false } };
+  [actions.hideModal](state) {
+    return { ...state, modalName: '' };
   },
-  [actions.showModal](state, { payload: { channelName } }) {
-    return { ...state, [channelName]: { show: true } };
+  [actions.showModal](state, { payload: { modalName } }) {
+    return { ...state, modalName };
   },
-}, { addChannelModal: { show: false }, editChannelModal: { show:  false }, deleteChannelModal: { show: false } });
+}, { modalName: '' });
 
 export default combineReducers({
   channells,
