@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import * as actions from '../../actions/index.js';
 import routes from '../../routes.js';
 
@@ -18,6 +19,7 @@ const actionCreators = {
 };
 
 const DeleteChannelModal = (props) => {
+  const { t } = useTranslation();
   const { hideModal, currentChannelId } = props;
   const handleHideModal = () => {
     hideModal();
@@ -47,13 +49,13 @@ const DeleteChannelModal = (props) => {
       animation
     >
       <Modal.Header closeButton>
-        <Modal.Title>Вы уверены, что хотите удалить канал?</Modal.Title>
+        <Modal.Title>{t('removeModalForm.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
         <Card>
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
-              <Button variant="primary" type="submit" block>Удалить</Button>
+              <Button variant="primary" type="submit" block>{t('removeModalForm.buttonName')}</Button>
             </Form>
           </Card.Body>
         </Card>

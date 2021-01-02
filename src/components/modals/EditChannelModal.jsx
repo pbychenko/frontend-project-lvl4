@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import * as actions from '../../actions/index.js';
 import routes from '../../routes.js';
 
@@ -18,6 +19,7 @@ const actionCreators = {
 };
 
 const EditChannelModal = (props) => {
+  const { t } = useTranslation();
   const { hideModal, currentChannelId } = props;
   const handleHideModal = () => {
     hideModal();
@@ -25,7 +27,7 @@ const EditChannelModal = (props) => {
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
-      errors.name = 'Required';
+      errors.name = t('editModalForm.textFieldError');
     }
 
     return errors;
@@ -45,7 +47,7 @@ const EditChannelModal = (props) => {
         hideModal();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('name', 'c сетью что-то не так');
+        setFieldError('name', t('networkError'));
         throw er;
       }
     },
@@ -62,19 +64,19 @@ const EditChannelModal = (props) => {
       onEntered={() => inputEl.current.focus()}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Изменить канал</Modal.Title>
+        <Modal.Title>{t('editModalForm.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
         <Card>
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group>
-                <Form.Control type="text" placeholder="Введите имя нового канала" {...formik.getFieldProps('name')} ref={inputEl} />
+                <Form.Control type="text" placeholder={t('editModalForm.placeholder')} {...formik.getFieldProps('name')} ref={inputEl} />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>
                 ) : null}
               </Form.Group>
-              <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>Изменить</Button>
+              <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>{t('editModalForm.buttonName')}</Button>
             </Form>
           </Card.Body>
         </Card>

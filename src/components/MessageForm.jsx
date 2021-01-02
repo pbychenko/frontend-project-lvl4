@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import UserContext from '../initContext';
 import routes from '../routes.js';
 
@@ -12,9 +13,10 @@ const mapStateToProps = (state) => {
 };
 
 const MessageForm = (props) => {
+  const { t } = useTranslation();
   const { currentChannelId } = props;
   const userName = useContext(UserContext);
-  const validate = (values) => ((!values.text) ? { text: 'Введите сообщение' } : {});
+  const validate = (values) => ((!values.text) ? { text: t('sendMessageForm.textFieldError') } : {});
   const formik = useFormik({
     initialValues: { text: '' },
     validate,
@@ -28,7 +30,7 @@ const MessageForm = (props) => {
         resetForm();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('text', 'c сетью что-то не так');
+        setFieldError('text', t('networkError'));
       }
     },
   });
@@ -37,13 +39,13 @@ const MessageForm = (props) => {
     <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <Form.Row>
         <Col md={10} xs={12}>
-          <Form.Control type="text" placeholder="Write your message here" name="text" { ...formik.getFieldProps('text')} />
+          <Form.Control type="text" placeholder={t('sendMessageForm.placeholder')} name="text" { ...formik.getFieldProps('text')} />
           {((formik.touched.text && formik.errors.text)) ? (
             <span>{formik.errors.text}</span>
           ) : null}
         </Col>
         <Col md={2} xs={12}>
-          <Button type="submit" disabled={formik.isSubmitting || !formik.dirty} block>Send</Button>
+          <Button type="submit" disabled={formik.isSubmitting || !formik.dirty} block>{t('sendMessageForm.buttonName')}</Button>
         </Col>
       </Form.Row>
     </Form>

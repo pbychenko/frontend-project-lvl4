@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-  // Spinner,
-  // Alert,
   ListGroup,
   Container,
   Row,
   Col,
-  // Button,
   Jumbotron,
 } from 'react-bootstrap';
 // import AddChannelModal from './modals/AddChannelModal.jsx';

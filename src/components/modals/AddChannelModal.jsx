@@ -5,19 +5,16 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import * as actions from '../../actions/index.js';
 import routes from '../../routes.js';
-
-// const mapStateToProps = (state) => {
-//   const { modalState: { modalName } } = state;
-//   return { modalName };
-// };
 
 const actionCreators = {
   hideModal: actions.hideModal,
 };
 
 const AddChannelModal = (props) => {
+  const { t } = useTranslation();
   const { hideModal } = props;
   const handleHideModal = () => {
     hideModal();
@@ -25,7 +22,7 @@ const AddChannelModal = (props) => {
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
-      errors.name = 'Required';
+      errors.name = t('addModalForm.textFieldError');
     }
 
     return errors;
@@ -45,7 +42,7 @@ const AddChannelModal = (props) => {
         hideModal();
       } catch (er) {
         setSubmitting(true);
-        setFieldError('name', 'c сетью что-то не так');
+        setFieldError('name', t('networkError'));
         throw er;
       }
     },
@@ -62,7 +59,7 @@ const AddChannelModal = (props) => {
       onEntered={() => inputEl.current.focus()}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('addModalForm.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
         <Card>
@@ -71,7 +68,7 @@ const AddChannelModal = (props) => {
               <Form.Group>
                 <Form.Control
                   type="text"
-                  placeholder="Введите имя нового канала"
+                  placeholder={t('addModalForm.placeholder')}
                   {...formik.getFieldProps('name')}
                   ref={inputEl}
                 />
@@ -79,7 +76,7 @@ const AddChannelModal = (props) => {
                   <div>{formik.errors.name}</div>
                 ) : null}
               </Form.Group>
-              <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>Добавить</Button>
+              <Button variant="primary" type="submit" block disabled={formik.isSubmitting}>{t('addModalForm.buttonName')}</Button>
             </Form>
           </Card.Body>
         </Card>
