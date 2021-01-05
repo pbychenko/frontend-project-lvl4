@@ -9,7 +9,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import reducers from './reducers/index.js';
 import App from './components/App.jsx';
 import initSocket from './initSockets';
@@ -22,23 +22,15 @@ if (!cookies.get('userName')) {
 
 const userName = cookies.get('userName');
 
-/* eslint-disable no-underscore-dangle */
-const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-const devtoolMiddleware = ext && ext();
-/* eslint-enable */
-
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
 export default () => {
-  const store = createStore(
-    reducers,
-    compose(
-      applyMiddleware(thunk),
-      devtoolMiddleware,
-    ),
-  );
+  const store = configureStore({
+    reducer: reducers,
+    middleware: [thunk],
+  });
   const baseUrl = 'http://localhost:5000';
   const socket = io(baseUrl);
 
