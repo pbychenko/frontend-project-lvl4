@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import Message from './Message.jsx';
-import { currentChannelMessagesSelector } from '../selectors';
+import { currentChannelMessagesSelector } from '../../selectors';
 
 const mapStateToProps = (state) => {
   const currentChannelMessages = currentChannelMessagesSelector(state);

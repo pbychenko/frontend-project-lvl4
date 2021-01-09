@@ -1,16 +1,8 @@
-import * as actions from './actions/index.js';
+import { getNewChannel, getRenamedChannel, getDeletedChannel } from './features/channels/channelsSlice';
+import { getNewMessage, getDeletedChannel as getDeletedChannelMessagesAction } from './features/messages/messagesSlice';
+import { getDeletedChannel as getDeletedChannelCurrentChannelAction } from './features/channels/currentChannelIdSlice';
 
 export default (socket, store) => {
-  // const baseUrl = 'http://localhost:5000';
-  // const socket = io(baseUrl);
-
-  const {
-    getNewMessage,
-    getNewChannel,
-    getDeletedChannel,
-    getRenamedChannel,
-  } = actions;
-
   socket.on('newMessage', (data) => {
     store.dispatch(getNewMessage(data));
   });
@@ -21,6 +13,8 @@ export default (socket, store) => {
 
   socket.on('removeChannel', (data) => {
     store.dispatch(getDeletedChannel(data));
+    store.dispatch(getDeletedChannelMessagesAction(data));
+    store.dispatch(getDeletedChannelCurrentChannelAction());
   });
 
   socket.on('renameChannel', (data) => {

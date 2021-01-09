@@ -6,21 +6,17 @@ import {
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import * as actions from '../../actions/index.js';
+import { hideModal as hideModalAction } from './modalStateSlice';
 import routes from '../../routes.js';
 
 const mapStateToProps = (state) => {
   const { currentChannelId } = state;
   return { currentChannelId };
 };
+const actionCreators = { hideModal: hideModalAction };
 
-const actionCreators = {
-  hideModal: actions.hideModal,
-};
-
-const DeleteChannelModal = (props) => {
+const DeleteChannelModal = ({ hideModal, currentChannelId }) => {
   const { t } = useTranslation();
-  const { hideModal, currentChannelId } = props;
   const handleHideModal = () => {
     hideModal();
   };

@@ -8,7 +8,6 @@ import io from 'socket.io-client';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import reducers from './reducers/index.js';
 import App from './components/App.jsx';
@@ -29,7 +28,6 @@ if (process.env.NODE_ENV !== 'production') {
 export default () => {
   const store = configureStore({
     reducer: reducers,
-    middleware: [thunk],
   });
   const baseUrl = 'http://localhost:5000';
   const socket = io(baseUrl);

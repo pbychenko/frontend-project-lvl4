@@ -9,9 +9,9 @@ import {
 // import AddChannelModal from './modals/AddChannelModal.jsx';
 // import EditChannelModal from './modals/EditChannelModal.jsx';
 // import DeleteChannelModal from './modals/DeleteChannelModal.jsx';
-import Channels from './Channels.jsx';
-import Messages from './Messages.jsx';
-import MessageForm from './MessageForm.jsx';
+import Channels from '../features/channels/Channels.jsx';
+import Messages from '../features/messages/Messages.jsx';
+import MessageForm from '../features/messages/MessageForm.jsx';
 
 const App = () => (
   <>

@@ -7,9 +7,10 @@ import {
   NavDropdown,
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import getModal from './modals/index';
-import * as actions from '../actions/index.js';
-import { channelsSelector } from '../selectors';
+import getModal from '../modals/index';
+import { showModal as showModalAction } from '../modals/modalStateSlice';
+import { selectChannel as selectChannelAction } from './currentChannelIdSlice';
+import { channelsSelector } from '../../selectors';
 
 const mapStateToProps = (state) => {
   const { currentChannelId, modalState: { modalName } } = state;
@@ -18,12 +19,11 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  selectChannel: actions.selectChannel,
-  showModal: actions.showModal,
+  selectChannel: selectChannelAction,
+  showModal: showModalAction,
 };
 
 const Channels = (props) => {
-  // const { channels, currentChannelId } = props;
   const { t } = useTranslation();
   const { channels, modalName } = props;
 
@@ -55,7 +55,6 @@ const Channels = (props) => {
       {channels.map((channel) => (
         <ListGroup.Item
           key={channel.id}
-          // className={ channel.id === currentChannelId ? 'active' : null}
           onClick={handleSelectChannel(channel.id)}
           style={{ wordWrap: 'break-word', borderStyle: 'none' }}
         >

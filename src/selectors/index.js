@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@reduxjs/toolkit';
 
 export const getChannelsById = (state) => state.channells.byId;
 export const getChannelsAllIds = (state) => state.channells.allIds;

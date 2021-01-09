@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useContext } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import UserContext from '../initContext';
-import routes from '../routes.js';
+import UserContext from '../../initContext';
+import routes from '../../routes.js';
 
 const mapStateToProps = (state) => {
   const { currentChannelId } = state;
@@ -39,7 +40,7 @@ const MessageForm = (props) => {
     <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <Form.Row>
         <Col md={10} xs={12}>
-          <Form.Control type="text" placeholder={t('sendMessageForm.placeholder')} name="text" { ...formik.getFieldProps('text')} />
+          <Form.Control type="text" placeholder={t('sendMessageForm.placeholder')} name="text" {...formik.getFieldProps('text')} />
           {((formik.touched.text && formik.errors.text)) ? (
             <span>{formik.errors.text}</span>
           ) : null}

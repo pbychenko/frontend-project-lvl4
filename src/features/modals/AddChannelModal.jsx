@@ -6,16 +6,13 @@ import {
 import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import * as actions from '../../actions/index.js';
+import { hideModal as hideModalAction } from './modalStateSlice';
 import routes from '../../routes.js';
 
-const actionCreators = {
-  hideModal: actions.hideModal,
-};
+const actionCreators = { hideModal: hideModalAction };
 
-const AddChannelModal = (props) => {
+const AddChannelModal = ({ hideModal }) => {
   const { t } = useTranslation();
-  const { hideModal } = props;
   const handleHideModal = () => {
     hideModal();
   };
@@ -69,6 +66,7 @@ const AddChannelModal = (props) => {
                 <Form.Control
                   type="text"
                   placeholder={t('addModalForm.placeholder')}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...formik.getFieldProps('name')}
                   ref={inputEl}
                 />
