@@ -1,18 +1,13 @@
 import React from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import Message from './Message.jsx';
 import { currentChannelMessagesSelector } from '../../selectors';
 
-const mapStateToProps = (state) => {
-  const currentChannelMessages = currentChannelMessagesSelector(state);
-  return { messages: currentChannelMessages };
-};
-
-const Messages = (props) => {
-  const { messages } = props;
-
+const Messages = () => {
+  const currentState = useSelector((state) => state);
+  const messages = currentChannelMessagesSelector(currentState);
   return (
     <ListGroup variant="flush">
       {messages.map((message) => (
@@ -24,4 +19,4 @@ const Messages = (props) => {
   );
 };
 
-export default connect(mapStateToProps, null)(Messages);
+export default Messages;

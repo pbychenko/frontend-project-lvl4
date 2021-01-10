@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ListGroup,
   Button,
@@ -8,46 +8,45 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import getModal from '../modals/index';
-import { showModal as showModalAction } from '../modals/modalStateSlice';
-import { selectChannel as selectChannelAction } from './currentChannelIdSlice';
+import { showModal } from '../modals/modalStateSlice';
+import { selectChannel } from './currentChannelIdSlice';
 import { channelsSelector } from '../../selectors';
 
-const mapStateToProps = (state) => {
-  const { currentChannelId, modalState: { modalName } } = state;
-  const channels = channelsSelector(state);
-  return { channels, currentChannelId, modalName };
-};
+// const mapStateToProps = (state) => {
+//   const { currentChannelId, modalState: { modalName } } = state;
+//   const channels = channelsSelector(state);
+//   return { channels, currentChannelId, modalName };
+// };
 
-const actionCreators = {
-  selectChannel: selectChannelAction,
-  showModal: showModalAction,
-};
+// const actionCreators = {
+//   selectChannel: selectChannelAction,
+//   showModal: showModalAction,
+// };
 
-const Channels = (props) => {
+const Channels = () => {
+  const dispatch = useDispatch();
+  const currentState = useSelector((state) => state);
+  const { modalState: { modalName } } = currentState;
+  const channels = channelsSelector(currentState);
   const { t } = useTranslation();
-  const { channels, modalName } = props;
 
   const handleSelectChannel = (channelId) => () => {
-    const { selectChannel } = props;
-    selectChannel({ id: channelId });
+    dispatch(selectChannel({ id: channelId }));
   };
 
   const handleAddChannelButton = (e) => {
     e.preventDefault();
-    const { showModal } = props;
-    showModal({ modalName: 'addChannelModal' });
+    dispatch(showModal({ modalName: 'addChannelModal' }));
   };
 
   const handleEditChannelButton = (e) => {
     e.preventDefault();
-    const { showModal } = props;
-    showModal({ modalName: 'editChannelModal' });
+    dispatch(showModal({ modalName: 'editChannelModal' }));
   };
 
   const handleDeleteChannelButton = (e) => {
     e.preventDefault();
-    const { showModal } = props;
-    showModal({ modalName: 'deleteChannelModal' });
+    dispatch(showModal({ modalName: 'deleteChannelModal' }));
   };
 
   return (
@@ -77,4 +76,4 @@ const Channels = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actionCreators)(Channels);
+export default Channels;

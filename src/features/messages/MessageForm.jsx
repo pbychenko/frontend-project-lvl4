@@ -3,19 +3,14 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import UserContext from '../../initContext';
 import routes from '../../routes.js';
 
-const mapStateToProps = (state) => {
-  const { currentChannelId } = state;
-  return { currentChannelId };
-};
-
-const MessageForm = (props) => {
+const MessageForm = () => {
+  const { currentChannelId } = useSelector((state) => state);
   const { t } = useTranslation();
-  const { currentChannelId } = props;
   const userName = useContext(UserContext);
   const validate = (values) => ((!values.text) ? { text: t('sendMessageForm.textFieldError') } : {});
   const formik = useFormik({
@@ -53,4 +48,4 @@ const MessageForm = (props) => {
   );
 };
 
-export default connect(mapStateToProps, null)(MessageForm);
+export default MessageForm;
