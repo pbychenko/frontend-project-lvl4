@@ -3,13 +3,15 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import UserContext from '../../initContext';
 import routes from '../../routes.js';
+import { sendMessage } from './messagesSlice';
 
 const MessageForm = () => {
   const { currentChannelId } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const userName = useContext(UserContext);
   const validate = (values) => ((!values.text) ? { text: t('sendMessageForm.textFieldError') } : {});
@@ -17,11 +19,14 @@ const MessageForm = () => {
     initialValues: { text: '' },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      const url = routes.channelMessagesPath(currentChannelId);
+      // const url = routes.channelMessagesPath(currentChannelId);
       const messageDate = new Date();
       const data = { data: { attributes: { ...values, userName, messageDate } } };
       try {
-        await axios.post(url, { ...data });
+        // await axios.post(url, { ...data });
+        console.log(currentChannelId);
+        await dispatch(sendMessage({ data, currentChannelId }));
+        // sendMessage(data, currentChannelId);
         setSubmitting(false);
         resetForm();
       } catch (er) {
