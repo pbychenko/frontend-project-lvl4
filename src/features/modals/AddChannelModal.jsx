@@ -1,20 +1,19 @@
 import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { hideModal as hideModalAction } from './modalStateSlice';
+import { hideModal } from './modalStateSlice';
 import routes from '../../routes.js';
 
-const actionCreators = { hideModal: hideModalAction };
-
-const AddChannelModal = ({ hideModal }) => {
+const AddChannelModal = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const handleHideModal = () => {
-    hideModal();
+    dispatch(hideModal());
   };
   const validate = (values) => {
     const errors = {};
@@ -36,7 +35,7 @@ const AddChannelModal = ({ hideModal }) => {
         await axios.post(url, { ...data });
         setSubmitting(false);
         resetForm();
-        hideModal();
+        dispatch(hideModal());
       } catch (er) {
         setSubmitting(true);
         setFieldError('name', t('networkError'));
@@ -83,4 +82,4 @@ const AddChannelModal = ({ hideModal }) => {
   );
 };
 
-export default connect(null, actionCreators)(AddChannelModal);
+export default AddChannelModal;

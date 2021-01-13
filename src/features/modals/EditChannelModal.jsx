@@ -1,27 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { hideModal as hideModalAction } from './modalStateSlice';
+import { hideModal } from './modalStateSlice';
 import routes from '../../routes.js';
 
-const mapStateToProps = (state) => {
-  const { currentChannelId } = state;
-  return { currentChannelId };
-};
-
-const actionCreators = { hideModal: hideModalAction };
-
-const EditChannelModal = (props) => {
+const EditChannelModal = () => {
   const { t } = useTranslation();
-  const { hideModal, currentChannelId } = props;
+  const dispatch = useDispatch();
+  const currentState = useSelector((state) => state);
+  const { currentChannelId } = currentState;
+
   const handleHideModal = () => {
-    hideModal();
+    dispatch(hideModal());
   };
   const validate = (values) => {
     const errors = {};
@@ -43,7 +39,7 @@ const EditChannelModal = (props) => {
         await axios.patch(url, { ...data });
         setSubmitting(false);
         resetForm();
-        hideModal();
+        dispatch(hideModal());
       } catch (er) {
         setSubmitting(true);
         setFieldError('name', t('networkError'));
@@ -84,4 +80,4 @@ const EditChannelModal = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actionCreators)(EditChannelModal);
+export default EditChannelModal;

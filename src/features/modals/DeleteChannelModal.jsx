@@ -1,25 +1,24 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { hideModal as hideModalAction } from './modalStateSlice';
+import { hideModal } from './modalStateSlice';
 import routes from '../../routes.js';
 
-const mapStateToProps = (state) => {
-  const { currentChannelId } = state;
-  return { currentChannelId };
-};
-const actionCreators = { hideModal: hideModalAction };
-
-const DeleteChannelModal = ({ hideModal, currentChannelId }) => {
+const DeleteChannelModal = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const currentState = useSelector((state) => state);
+  const { currentChannelId } = currentState;
+
   const handleHideModal = () => {
-    hideModal();
+    dispatch(hideModal());
   };
+
   const formik = useFormik({
     initialValues: {},
     onSubmit: async (values, { setSubmitting, resetForm }) => {
@@ -28,7 +27,7 @@ const DeleteChannelModal = ({ hideModal, currentChannelId }) => {
         await axios.delete(url);
         setSubmitting(false);
         resetForm();
-        hideModal();
+        dispatch(hideModal());
       } catch (er) {
         setSubmitting(true);
         throw er;
@@ -60,4 +59,4 @@ const DeleteChannelModal = ({ hideModal, currentChannelId }) => {
   );
 };
 
-export default connect(mapStateToProps, actionCreators)(DeleteChannelModal);
+export default DeleteChannelModal;
