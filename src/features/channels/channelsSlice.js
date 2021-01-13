@@ -1,9 +1,28 @@
 /* eslint-disable no-param-reassign */
+import axios from 'axios';
 import _ from 'lodash';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import gon from 'gon';
+import routes from '../../routes.js';
 
 const { channels } = gon;
+
+export const removeChannelPostRequest = createAsyncThunk(
+  'channels/RemoveChannel',
+  async (currentChannelId) => {
+    try {
+      const url = routes.channelPath(currentChannelId);
+      // console.log(url);
+      const response = await axios.delete(url);
+      console.log(response);
+      return response.data;
+    } catch (er) {
+      if (!er.response) {
+        throw er;
+      }
+    }
+  },
+);
 
 const channellsSlice = createSlice({
   name: 'channells',

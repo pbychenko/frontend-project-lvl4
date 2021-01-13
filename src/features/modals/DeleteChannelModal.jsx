@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import {
   Modal, Card, Form, Button,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { hideModal } from './modalStateSlice';
-import routes from '../../routes.js';
+import { removeChannelPostRequest } from '../channels/channelsSlice';
 
 const DeleteChannelModal = () => {
   const { t } = useTranslation();
@@ -22,9 +21,8 @@ const DeleteChannelModal = () => {
   const formik = useFormik({
     initialValues: {},
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      const url = routes.channelPath(currentChannelId);
       try {
-        await axios.delete(url);
+        dispatch(removeChannelPostRequest(currentChannelId));
         setSubmitting(false);
         resetForm();
         dispatch(hideModal());

@@ -8,6 +8,7 @@ import { currentChannelMessagesSelector } from '../../selectors';
 const Messages = () => {
   const currentState = useSelector((state) => state);
   const messages = currentChannelMessagesSelector(currentState);
+  console.log(messages);
   return (
     <ListGroup variant="flush">
       {messages.map((message) => (

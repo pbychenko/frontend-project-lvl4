@@ -1,5 +1,6 @@
 import { getNewChannel, getRenamedChannel, getDeletedChannel } from './features/channels/channelsSlice';
-import { getNewMessage, getDeletedChannel as getDeletedChannelMessagesAction } from './features/messages/messagesSlice';
+// import { getNewMessage, getDeletedChannel as getDeletedChannelMessagesAction } from './features/messages/messagesSlice';
+import { getNewMessage } from './features/messages/messagesSlice';
 import { getDeletedChannel as getDeletedChannelCurrentChannelAction } from './features/channels/currentChannelIdSlice';
 
 export default (socket, store) => {
@@ -13,8 +14,8 @@ export default (socket, store) => {
 
   socket.on('removeChannel', (data) => {
     store.dispatch(getDeletedChannel(data));
-    store.dispatch(getDeletedChannelMessagesAction(data));
-    store.dispatch(getDeletedChannelCurrentChannelAction());
+    // store.dispatch(getDeletedChannelMessagesAction(data));
+    // store.dispatch(getDeletedChannelCurrentChannelAction());
   });
 
   socket.on('renameChannel', (data) => {
