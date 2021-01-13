@@ -11,12 +11,14 @@ export const sendMessage = createAsyncThunk(
   'messagges/sendNewMessage',
   async (parameters) => {
     const { data, currentChannelId } = parameters;
-    console.log('here');
-    // console.log(data);
-    console.log(currentChannelId);
-
-    const url = routes.channelMessagesPath(currentChannelId);
-    await axios.post(url, { ...data });
+    try {
+      const url = routes.channelMessagesPath(currentChannelId);
+      await axios.post(url, { ...data });
+    } catch (er) {
+      if (!er.response) {
+        throw er;
+      }
+    }
   },
 );
 
@@ -36,13 +38,6 @@ const messaggesSlice = createSlice({
 
       state.byId = _.omitBy(byId, (message) => message.channelId === id);
       state.allIds = _.without(allIds, ...deletedChannelMessageIds);
-    },
-  },
-  extraReducers: {
-    // omit posts loading reducers
-    [sendMessage.fulfilled]: (state, action) => {
-      // We can directly add the new post object to our posts array
-      // state.posts.push(action.payload)
     },
   },
 });

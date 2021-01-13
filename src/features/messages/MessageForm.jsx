@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useContext } from 'react';
-import axios from 'axios';
 import { useFormik } from 'formik';
 import { Form, Col, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import UserContext from '../../initContext';
-import routes from '../../routes.js';
 import { sendMessage } from './messagesSlice';
 
 const MessageForm = () => {
@@ -19,17 +17,13 @@ const MessageForm = () => {
     initialValues: { text: '' },
     validate,
     onSubmit: async (values, { setSubmitting, resetForm, setFieldError }) => {
-      // const url = routes.channelMessagesPath(currentChannelId);
       const messageDate = new Date();
       const data = { data: { attributes: { ...values, userName, messageDate } } };
-      try {
-        // await axios.post(url, { ...data });
-        console.log(currentChannelId);
-        await dispatch(sendMessage({ data, currentChannelId }));
-        // sendMessage(data, currentChannelId);
+      const result = await dispatch(sendMessage({ data, currentChannelId }));
+      if (!result.error) {
         setSubmitting(false);
         resetForm();
-      } catch (er) {
+      } else {
         setSubmitting(true);
         setFieldError('text', t('networkError'));
       }
