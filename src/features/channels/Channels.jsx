@@ -12,17 +12,6 @@ import { showModal } from '../modals/modalStateSlice';
 import { selectChannel } from './currentChannelIdSlice';
 import { channelsSelector } from '../../selectors';
 
-// const mapStateToProps = (state) => {
-//   const { currentChannelId, modalState: { modalName } } = state;
-//   const channels = channelsSelector(state);
-//   return { channels, currentChannelId, modalName };
-// };
-
-// const actionCreators = {
-//   selectChannel: selectChannelAction,
-//   showModal: showModalAction,
-// };
-
 const Channels = () => {
   const dispatch = useDispatch();
   const currentState = useSelector((state) => state);
@@ -31,6 +20,7 @@ const Channels = () => {
   const { t } = useTranslation();
 
   const handleSelectChannel = (channelId) => () => {
+    console.log(channelId);
     dispatch(selectChannel({ id: channelId }));
   };
 

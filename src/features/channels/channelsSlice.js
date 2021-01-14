@@ -9,17 +9,16 @@ const { channels } = gon;
 
 export const removeChannelPostRequest = createAsyncThunk(
   'channels/RemoveChannel',
-  async (currentChannelId) => {
+  async (currentChannelId, { rejectWithValue }) => {
     try {
       const url = routes.channelPath(currentChannelId);
-      // console.log(url);
-      const response = await axios.delete(url);
-      console.log(response);
-      return response.data;
+      await axios.delete(url);
+      return { id: currentChannelId };
     } catch (er) {
       if (!er.response) {
         throw er;
       }
+      return rejectWithValue(er.response.data);
     }
   },
 );

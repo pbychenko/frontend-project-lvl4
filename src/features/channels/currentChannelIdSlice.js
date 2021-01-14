@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { removeChannelPostRequest } from './channelsSlice';
 
 const currentChannelIdSlice = createSlice({
   name: 'currentChannelId',
@@ -7,9 +8,9 @@ const currentChannelIdSlice = createSlice({
     selectChannel(state, { payload: { id } }) {
       return id;
     },
-    getDeletedChannel() {
-      return 1;
-    },
+  },
+  extraReducers: {
+    [removeChannelPostRequest.fulfilled]: () => 1,
   },
 });
 

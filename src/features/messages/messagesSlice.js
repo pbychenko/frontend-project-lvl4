@@ -31,20 +31,9 @@ const messaggesSlice = createSlice({
       state.byId[attributes.id] = attributes;
       state.allIds.push(attributes.id);
     },
-    // getDeletedChannel(state, { payload: { data: { id } } }) {
-    //   const { byId, allIds } = state;
-    //   const deletedChannelMessageIds = Object.entries(byId)
-    //     .filter(([, value]) => value.channelId === id)
-    //     .map(([, value]) => value.id);
-
-    //   state.byId = _.omitBy(byId, (message) => message.channelId === id);
-    //   state.allIds = _.without(allIds, ...deletedChannelMessageIds);
-    // },
   },
   extraReducers: {
-    [removeChannelPostRequest.fulfilled]: (state, action) => {
-      console.log('ss');
-      console.log(action);
+    [removeChannelPostRequest.fulfilled]: (state, { payload: { id } }) => {
       const { byId, allIds } = state;
       const deletedChannelMessageIds = Object.entries(byId)
         .filter(([, value]) => value.channelId === id)
