@@ -29,12 +29,19 @@ const MessageForm = () => {
       }
     },
   });
+  const textBorderColorStyle = formik.errors.text ? { borderColor: 'red' } : null;
 
   return (
     <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <Form.Row>
         <Col md={10} xs={12}>
-          <Form.Control type="text" placeholder={t('sendMessageForm.placeholder')} name="text" {...formik.getFieldProps('text')} />
+          <Form.Control
+            type="text"
+            placeholder={t('sendMessageForm.placeholder')}
+            name="text"
+            {...formik.getFieldProps('text')}
+            style={textBorderColorStyle}
+          />
           {((formik.touched.text && formik.errors.text)) ? (
             <span>{formik.errors.text}</span>
           ) : null}

@@ -44,6 +44,7 @@ const AddChannelModal = () => {
     },
   });
   const inputEl = useRef(null);
+  const textBorderColorStyle = formik.errors.name ? { borderColor: 'red' } : null;
 
   return (
     <Modal
@@ -68,6 +69,7 @@ const AddChannelModal = () => {
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...formik.getFieldProps('name')}
                   ref={inputEl}
+                  style={textBorderColorStyle}
                 />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>

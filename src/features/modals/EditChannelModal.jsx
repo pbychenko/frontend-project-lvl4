@@ -48,6 +48,7 @@ const EditChannelModal = () => {
     },
   });
   const inputEl = useRef(null);
+  const textBorderColorStyle = formik.errors.name ? { borderColor: 'red' } : null;
 
   return (
     <Modal
@@ -66,7 +67,13 @@ const EditChannelModal = () => {
           <Card.Body>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group>
-                <Form.Control type="text" placeholder={t('editModalForm.placeholder')} {...formik.getFieldProps('name')} ref={inputEl} />
+                <Form.Control
+                  type="text"
+                  placeholder={t('editModalForm.placeholder')}
+                  {...formik.getFieldProps('name')}
+                  ref={inputEl}
+                  style={textBorderColorStyle}
+                />
                 {formik.touched.name && formik.errors.name ? (
                   <div>{formik.errors.name}</div>
                 ) : null}
