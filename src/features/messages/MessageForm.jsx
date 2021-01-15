@@ -32,7 +32,7 @@ const MessageForm = () => {
   const textBorderColorStyle = formik.errors.text ? { borderColor: 'red' } : null;
 
   return (
-    <Form onSubmit={formik.handleSubmit} style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+    <Form onSubmit={formik.handleSubmit} id="message-form">
       <Form.Row>
         <Col md={10} xs={12}>
           <Form.Control

@@ -1,1 +1,21 @@
 @import '~bootstrap/scss/bootstrap';
+
+#channels .list-group-item {
+  word-wrap: break-word;
+  border-style: none;
+  padding: 0px;
+}
+
+.list-group button {
+  margin-top: 10px;
+}
+
+#message-form {
+  margin-top: 10px;
+}
+
+#messages .list-group-item {
+  word-wrap: break-word;
+  border-style: none;
+  text-align: right;
+}

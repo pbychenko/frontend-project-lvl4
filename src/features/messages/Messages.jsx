@@ -10,9 +10,9 @@ const Messages = () => {
   const messages = currentChannelMessagesSelector(currentState);
   console.log(messages);
   return (
-    <ListGroup variant="flush">
+    <ListGroup variant="flush" id="messages">
       {messages.map((message) => (
-        <ListGroup.Item key={_.uniqueId()} style={{ wordWrap: 'break-word', textAlign: 'right', borderStyle: 'none' }}>
+        <ListGroup.Item key={_.uniqueId()}>
           <Message userName={message.userName} text={message.text} date={message.messageDate} />
         </ListGroup.Item>
       ))}

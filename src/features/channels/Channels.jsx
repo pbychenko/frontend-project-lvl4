@@ -39,17 +39,16 @@ const Channels = () => {
   };
 
   return (
-    <ListGroup variant="flush">
+    <ListGroup variant="flush" id="channels">
       {channels.map((channel) => (
         <ListGroup.Item
           key={channel.id}
           onClick={handleSelectChannel(channel.id)}
-          style={{ wordWrap: 'break-word', borderStyle: 'none', padding: '0px' }}
         >
           <Nav variant="pills">
-            <Nav.Link href="" style={{ width: '88%' }} className={channel.id === currentChannelId ? 'active' : null}>{channel.name}</Nav.Link>
+            <Nav.Link href="" style={{ width: channel.removable ? '88%' : '100%' }} className={channel.id === currentChannelId ? 'active' : null}>{channel.name}</Nav.Link>
             {channel.removable ? (
-              <NavDropdown id="basic-nav-dropdown" title="" style={{ width: '12%' }}>
+              <NavDropdown id="basic-nav-dropdown" title="" className={channel.id === currentChannelId ? 'active show' : null}>
                 <NavDropdown.Item href="" onClick={handleEditChannelButton}>{t('modalButtonNames.editModal')}</NavDropdown.Item>
                 <NavDropdown.Item href="" onClick={handleDeleteChannelButton}>{t('modalButtonNames.removeModal')}</NavDropdown.Item>
               </NavDropdown>
@@ -57,7 +56,7 @@ const Channels = () => {
           </Nav>
         </ListGroup.Item>
       ))}
-      <Button type="submit" block onClick={handleAddChannelButton} style={{ marginTop: '10px' }}>
+      <Button type="submit" block onClick={handleAddChannelButton}>
         {t('modalButtonNames.addModal')}
       </Button>
       {getModal(modalName)}
