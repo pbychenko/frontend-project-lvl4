@@ -15,12 +15,11 @@ import { channelsSelector } from '../../selectors';
 const Channels = () => {
   const dispatch = useDispatch();
   const currentState = useSelector((state) => state);
-  const { modalState: { modalName } } = currentState;
+  const { modalState: { modalName }, currentChannelId } = currentState;
   const channels = channelsSelector(currentState);
   const { t } = useTranslation();
 
   const handleSelectChannel = (channelId) => () => {
-    console.log(channelId);
     dispatch(selectChannel({ id: channelId }));
   };
 
@@ -45,12 +44,12 @@ const Channels = () => {
         <ListGroup.Item
           key={channel.id}
           onClick={handleSelectChannel(channel.id)}
-          style={{ wordWrap: 'break-word', borderStyle: 'none' }}
+          style={{ wordWrap: 'break-word', borderStyle: 'none', padding: '0px' }}
         >
-          <Nav>
-            <Nav.Link href="" style={{ width: '90%' }}>{channel.name}</Nav.Link>
+          <Nav variant="pills">
+            <Nav.Link href="" style={{ width: '88%' }} className={channel.id === currentChannelId ? 'active' : null}>{channel.name}</Nav.Link>
             {channel.removable ? (
-              <NavDropdown id="basic-nav-dropdown" title="" style={{ width: '10%' }}>
+              <NavDropdown id="basic-nav-dropdown" title="" style={{ width: '12%' }}>
                 <NavDropdown.Item href="" onClick={handleEditChannelButton}>{t('modalButtonNames.editModal')}</NavDropdown.Item>
                 <NavDropdown.Item href="" onClick={handleDeleteChannelButton}>{t('modalButtonNames.removeModal')}</NavDropdown.Item>
               </NavDropdown>
@@ -58,7 +57,7 @@ const Channels = () => {
           </Nav>
         </ListGroup.Item>
       ))}
-      <Button type="submit" block onClick={handleAddChannelButton}>
+      <Button type="submit" block onClick={handleAddChannelButton} style={{ marginTop: '10px' }}>
         {t('modalButtonNames.addModal')}
       </Button>
       {getModal(modalName)}
