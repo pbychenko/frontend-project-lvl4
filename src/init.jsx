@@ -29,7 +29,7 @@ export default () => {
   const store = configureStore({
     reducer: reducers,
   });
-  console.log('herku');
+  console.log('integration test');
   // console.log(process.env.NODE_ENV);
   // const baseUrl = 'http://localhost:5000';
   // const baseUrl = process.env.PORT || 5000;
