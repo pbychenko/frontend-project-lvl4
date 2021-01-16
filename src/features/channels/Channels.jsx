@@ -38,6 +38,14 @@ const Channels = () => {
     dispatch(showModal({ modalName: 'deleteChannelModal' }));
   };
 
+  const renderModal = () => {
+    if (modalName === '') {
+      return null;
+    }
+    const ModalComponent = getModal(modalName);
+    return (<ModalComponent />);
+  };
+
   return (
     <ListGroup variant="flush" id="channels">
       {channels.map((channel) => (
@@ -59,7 +67,8 @@ const Channels = () => {
       <Button type="submit" block onClick={handleAddChannelButton}>
         {t('modalButtonNames.addModal')}
       </Button>
-      {getModal(modalName)}
+      {/* {getModal(modalName)} */}
+      {renderModal()}
     </ListGroup>
   );
 };
