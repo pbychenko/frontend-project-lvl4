@@ -29,8 +29,12 @@ export default () => {
   const store = configureStore({
     reducer: reducers,
   });
-  const baseUrl = 'http://localhost:5000';
-  const socket = io(baseUrl);
+  console.log('herku');
+  // console.log(process.env.NODE_ENV);
+  // const baseUrl = 'http://localhost:5000';
+  // const baseUrl = process.env.PORT || 5000;
+  // const baseUrl = (process.env.NODE_ENV ? production : development);
+  const socket = io();
 
   initSocket(socket, store);
 
