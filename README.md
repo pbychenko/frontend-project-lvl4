@@ -4,4 +4,4 @@
 
 ## Frontend project 4
 
-### Move to (https://aqueous-forest-50791.herokuapp.com/)
+### https://aqueous-forest-50791.herokuapp.com/

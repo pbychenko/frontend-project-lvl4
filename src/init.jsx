@@ -29,7 +29,7 @@ export default () => {
   const store = configureStore({
     reducer: reducers,
   });
-  console.log('rollbar test');
+  console.log('final test');
   const socket = io();
 
   initSocket(socket, store);
