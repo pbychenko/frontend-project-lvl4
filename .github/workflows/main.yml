@@ -1,0 +1,8 @@
+name: Lint
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run ESLint
+      run: eslint . --ext .js,.jsx,.ts,.tsx
