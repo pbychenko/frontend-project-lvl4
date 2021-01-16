@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: make lint

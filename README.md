@@ -1,18 +1,7 @@
 [![Github Actions Status](https://github.com/hexlet-components/projects-frontend-l4-server/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-components/projects-frontend-l4-server/actions)
 
-## Requirements
+<a href="https://codeclimate.com/github/pbychenko/frontend-project-lvl4/maintainability"><img src="https://api.codeclimate.com/v1/badges/0a24b8337837e3b9b703/maintainability" /></a>
 
-* [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+## Frontend project 4
 
-## Install
-
-```sh
-$ make install
-```
-
-## Run
-
-```sh
-$ make start
-# open http://localhost:5000
-```
+### Move to (https://aqueous-forest-50791.herokuapp.com/)
