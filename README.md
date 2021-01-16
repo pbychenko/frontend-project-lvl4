@@ -1,4 +1,4 @@
-[![Github Actions Status](https://github.com/hexlet-components/projects-frontend-l4-server/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-components/projects-frontend-l4-server/actions)
+[![Github Actions Status](https://github.com/pbychenko/projects-frontend-l4/workflows/Lint/badge.svg)](https://github.com/pbychenko/projects-frontend-l4/workflows/Lint/badge.svg)
 
 <a href="https://codeclimate.com/github/pbychenko/frontend-project-lvl4/maintainability"><img src="https://api.codeclimate.com/v1/badges/0a24b8337837e3b9b703/maintainability" /></a>
 
