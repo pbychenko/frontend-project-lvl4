@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import AddChannelModal from './AddChannelModal.jsx';
 import EditChannelModal from './EditChannelModal.jsx';
