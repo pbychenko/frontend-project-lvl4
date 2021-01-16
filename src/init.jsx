@@ -29,11 +29,7 @@ export default () => {
   const store = configureStore({
     reducer: reducers,
   });
-  console.log('integration test');
-  // console.log(process.env.NODE_ENV);
-  // const baseUrl = 'http://localhost:5000';
-  // const baseUrl = process.env.PORT || 5000;
-  // const baseUrl = (process.env.NODE_ENV ? production : development);
+  console.log('rollbar test');
   const socket = io();
 
   initSocket(socket, store);
