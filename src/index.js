@@ -1,4 +1,4 @@
 // // @ts-check
-import runApp from './init';
+import runApp from './Init';
 
 runApp();
