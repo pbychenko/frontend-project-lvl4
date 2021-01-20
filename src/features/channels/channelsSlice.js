@@ -2,10 +2,10 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import gon from 'gon';
+// import gon from 'gon';
 import routes from '../../routes.js';
 
-const { channels } = gon;
+// const { channels } = gon;
 
 export const removeChannelPostRequest = createAsyncThunk(
   'channels/RemoveChannel',
@@ -25,7 +25,8 @@ export const removeChannelPostRequest = createAsyncThunk(
 
 const channellsSlice = createSlice({
   name: 'channells',
-  initialState: { byId: _.keyBy(channels, 'id'), allIds: channels.map((c) => c.id) },
+  // initialState: { byId: _.keyBy(channels, 'id'), allIds: channels.map((c) => c.id) },
+  initialState: {},
   reducers: {
     getNewChannel(state, { payload: { data: { attributes } } }) {
       state.byId[attributes.id] = attributes;

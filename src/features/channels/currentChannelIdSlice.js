@@ -3,7 +3,8 @@ import { removeChannelPostRequest } from './channelsSlice';
 
 const currentChannelIdSlice = createSlice({
   name: 'currentChannelId',
-  initialState: 1,
+  // initialState: 1,
+  initialState: {},
   reducers: {
     selectChannel(state, { payload: { id } }) {
       return id;

@@ -25,9 +25,10 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-export default () => {
+export default (initState) => {
   const store = configureStore({
     reducer: reducers,
+    preloadedState: initState,
   });
   const socket = io();
 
