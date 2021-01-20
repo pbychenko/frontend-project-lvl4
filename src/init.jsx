@@ -22,9 +22,9 @@ if (!cookies.get('userName')) {
 
 const userName = cookies.get('userName');
 
-if (process.env.NODE_ENV !== 'production') {
-  localStorage.debug = 'chat:*';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   localStorage.debug = 'chat:*';
+// }
 
 const formatState = (state) => {
   const { messages, channels } = state;
