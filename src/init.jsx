@@ -9,6 +9,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import _ from 'lodash';
 import reducers from './reducers/index.js';
 import App from './components/App.jsx';
 import initSocket from './initSockets';
@@ -25,10 +26,22 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
+const formatState = (state) => {
+  const { messages, channels } = state;
+  return {
+    channells: { byId: _.keyBy(channels, 'id'), allIds: channels.map((c) => c.id) },
+    messagges: { byId: _.keyBy(messages, 'id'), allIds: messages.map((c) => c.id) },
+    currentChannelId: 1,
+    modalState: { modalName: '' },
+  };
+};
+
 export default (initState) => {
+  const formatedState = formatState(initState);
+
   const store = configureStore({
     reducer: reducers,
-    preloadedState: initState,
+    preloadedState: formatedState,
   });
   const socket = io();
 
