@@ -15,6 +15,7 @@ import App from './components/App.jsx';
 import initSocket from './initSockets';
 import UserContext from './initContext';
 import './locales/index';
+import gon from 'gon';
 
 if (!cookies.get('userName')) {
   cookies.set('userName', faker.name.findName());
@@ -36,7 +37,7 @@ const formatState = (state) => {
   };
 };
 
-export default (initState) => {
+const app = (initState) => {
   const formatedState = formatState(initState);
 
   const store = configureStore({
@@ -55,3 +56,7 @@ export default (initState) => {
     </Provider>, document.getElementById('chat'),
   );
 };
+
+app(gon);
+
+export default app;
