@@ -45,7 +45,6 @@ const Channels = () => {
     const ModalComponent = getModal(modalName);
     return (<ModalComponent />);
   };
-  console.log(channels);
 
   return (
     <ListGroup variant="flush" id="channels">
