@@ -15,7 +15,6 @@ import App from './components/App.jsx';
 import initSocket from './initSockets';
 import UserContext from './initContext';
 import './locales/index';
-import gon from 'gon';
 
 if (!cookies.get('userName')) {
   cookies.set('userName', faker.name.findName());
