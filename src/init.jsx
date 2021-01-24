@@ -6,7 +6,7 @@ import faker from 'faker';
 import cookies from 'js-cookie';
 import io from 'socket.io-client';
 import React from 'react';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import _ from 'lodash';
@@ -46,14 +46,21 @@ const app = (initState) => {
   const socket = io();
 
   initSocket(socket, store);
-
-  render(
+  return (
     <Provider store={store}>
       <UserContext.Provider value={userName}>
         <App />
       </UserContext.Provider>
-    </Provider>, document.getElementById('chat'),
+    </Provider>
   );
+
+  // render(
+  //   <Provider store={store}>
+  //     <UserContext.Provider value={userName}>
+  //       <App />
+  //     </UserContext.Provider>
+  //   </Provider>, document.getElementById('chat'),
+  // );
 };
 
 export default app;
