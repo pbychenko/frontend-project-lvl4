@@ -2,7 +2,7 @@
   "name": "frontend_l4_chat_project",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/init.jsx",
   "bin": {
     "slack": "dist/bin/slack.js"
   },
@@ -21,7 +21,7 @@
     "type": "git",
     "url": "git@github.com:hexlet-components/projects-frontend-l4-server.git"
   },
-  "author": "Kirill Mokevnin",
+  "author": "Pavel Bychenko",
   "license": "ISC",
   "homepage": "",
   "dependencies": {
