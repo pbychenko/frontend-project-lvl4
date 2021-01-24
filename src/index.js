@@ -4,5 +4,3 @@ import gon from 'gon';
 import runApp from './init';
 
 runApp(gon);
-
-export default runApp;
