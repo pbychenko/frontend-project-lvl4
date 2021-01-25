@@ -1,8 +1,6 @@
 // // @ts-check
 import { render } from 'react-dom';
 import gon from 'gon';
-import runApp from './init';
+import runApp from '.';
 
 render(runApp(gon), document.getElementById('chat'));
-
-export default runApp;
