@@ -1,7 +1,4 @@
 // @ts-nocheck
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-import '../assets/application.scss';
 import faker from 'faker';
 import cookies from 'js-cookie';
 import io from 'socket.io-client';
