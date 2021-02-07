@@ -5,5 +5,4 @@ import '../assets/application.scss';
 import gon from 'gon';
 import runApp from './init';
 
-console.log('test');
 runApp(gon);
