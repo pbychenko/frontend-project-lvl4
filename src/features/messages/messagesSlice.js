@@ -2,11 +2,8 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import gon from 'gon';
 import routes from '../../routes.js';
 import { removeChannelPostRequest } from '../channels/channelsSlice';
-
-// const { messages } = gon;
 
 export const sendMessage = createAsyncThunk(
   'messagges/sendNewMessage',
@@ -25,7 +22,6 @@ export const sendMessage = createAsyncThunk(
 
 const messaggesSlice = createSlice({
   name: 'messagges',
-  // initialState: { byId: _.keyBy(messages, 'id'), allIds: messages.map((c) => c.id) },
   initialState: {},
   reducers: {
     getNewMessage(state, { payload: { data: { attributes } } }) {

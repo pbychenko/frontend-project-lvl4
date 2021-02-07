@@ -42,6 +42,7 @@ const Channels = () => {
     if (modalName === '') {
       return null;
     }
+
     const ModalComponent = getModal(modalName);
     return (<ModalComponent />);
   };
@@ -67,7 +68,6 @@ const Channels = () => {
       <Button type="submit" block onClick={handleAddChannelButton}>
         {t('modalButtonNames.addModal')}
       </Button>
-      {/* {getModal(modalName)} */}
       {renderModal()}
     </ListGroup>
   );

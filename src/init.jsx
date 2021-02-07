@@ -43,13 +43,6 @@ const app = (initState) => {
   const socket = io();
 
   initSocket(socket, store);
-  // return (
-  //   <Provider store={store}>
-  //     <UserContext.Provider value={userName}>
-  //       <App />
-  //     </UserContext.Provider>
-  //   </Provider>
-  // );
 
   render(
     <Provider store={store}>
